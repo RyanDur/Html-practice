@@ -1,0 +1,61 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "base";
+
+.container {
+    @include container;
+    @include susy-grid-background;
+    background: rgba(247, 243, 232, 1);
+
+    #main {
+        text-align: center;
+        padding: 39px;
+        clear: both;
+
+        h1 {
+            @include text-shadow(-3px 3px 2px white);
+            margin: 0 auto;
+            font-family: Rye;
+            font-size: 50px;
+        }
+    }
+
+    nav {
+        @include span-columns(10);
+        border-top: 1px solid green;
+        border-bottom: 1px solid green;
+        margin: $grid-padding/2 columns(3) $grid-padding/2 columns(3);
+        padding: .5em;
+        ul {
+            @include pre(3);
+            li { 
+                @include span-columns(3);
+                text-align: center;
+            }
+        }
+    }
+
+    .content {
+        font-family: Alegreya;
+        .main {
+            @include span-columns(8, 16);
+        }
+
+        .left-sidebar {
+            @include span-columns(4 alpha,16);
+        }
+
+        .right-sidebar {
+            @include span-columns(4 omega,16);
+        }
+    }
+}
+
+
+
+
+
+
