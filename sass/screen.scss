@@ -9,8 +9,9 @@
     @include container;
     @include susy-grid-background;
     background: rgba(247, 243, 232, 1);
+    position: relative;
 
-    #main {
+    header.main {
         text-align: center;
         padding: 39px;
         clear: both;
@@ -23,7 +24,7 @@
         }
     }
 
-    nav {
+    nav.main {
         @include span-columns(10);
         border-top: 1px solid green;
         border-bottom: 1px solid green;
@@ -59,7 +60,10 @@
     }
 }
 
-
+.sticky {
+     position: fixed;
+    top: 0;
+}
 
 
 
