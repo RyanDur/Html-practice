@@ -3,14 +3,27 @@ var revealNav = function() {
 };
 
 var stickySection = function(container, section) {
+    var top_spacing = 15;
+    var waypoint_offset = 150;
     container.waypoint({
         handler: function(direction) {
-                    section.toggleClass('sticky', direction=='down');
-                    if (direction == 'down')
-                       container.css({ 'height': section.outerHeight()  });
-                    else
-                       container.css({ 'height':'auto'  });
-                 }
+                    if (direction == 'down'){
+                        container.css({'height': section.outerHeight()});
+                        section.addClass('sticky')
+                            .stop()
+                            .css('top', -section.outerHeight())
+                            .animate({'top': top_spacing});
+                    } else {
+                        container.css({'height':'auto'});
+                        section.removeClass('sticky')
+                            .stop()
+                            .css("top", section.outerHeight() + waypoint_offset)
+                            .animate({'top': ""});
+                    }
+                 },
+        offset: function() {
+                    return -(section.outerHeight()+waypoint_offset);
+                }
     });
 };
 

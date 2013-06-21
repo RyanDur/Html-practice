@@ -6,8 +6,6 @@
 @import "base";
 
 .container {
-    @include container;
-    @include susy-grid-background;
     background: rgba(247, 243, 232, 1);
     position: relative;
 
@@ -25,16 +23,15 @@
     }
 
     nav.main {
-        @include span-columns(10);
         border-top: 1px solid green;
         border-bottom: 1px solid green;
-        margin: $grid-padding/2 columns(3) $grid-padding/2 columns(3);
+        margin: 0 25% 0 25%;
         padding: .5em;
         background: rgba(247, 243, 232, 1);
         ul {
-            @include pre(3);
             li { 
-                @include span-columns(3);
+                display: inline-block;
+                margin: 0 auto;
                 text-align: center;
             }
         }
@@ -42,29 +39,45 @@
 
     .content {
         font-family: Alegreya;
+        width: 100%;
+        padding: 20px;
         .main {
-            @include span-columns(8, 16);
+            background: rgba(255, 255, 255, 1);
+            padding: 20px;
+            float: left;
+            width: 50%;
         }
 
         .left-sidebar {
-            @include span-columns(4 alpha,16);
-
+            width: 25%;
+            float: left;
+            padding: 20px;
             .git {
                 border: 1px solid;
             }
         }
 
         .right-sidebar {
-            @include span-columns(4 omega,16);
+            width: 25%;
+            padding: 20px;
+            float: left;
+        }
+        
+        &:after {
+            content: "";
+            display: table;
+            clear: both;
         }
     }
 }
 
 .sticky {
-     position: fixed;
-    top: 0;
+    position: fixed;
+    margin: 0;
 }
 
-
+*, *:after, *:before {
+  @include box-sizing(border-box);
+}
 
 
