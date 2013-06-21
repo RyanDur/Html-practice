@@ -29,6 +29,7 @@
         border-bottom: 1px solid green;
         margin: $grid-padding/2 columns(3) $grid-padding/2 columns(3);
         padding: .5em;
+        background: rgba(247, 243, 232, 1);
         ul {
             @include pre(3);
             li { 
@@ -46,6 +47,10 @@
 
         .left-sidebar {
             @include span-columns(4 alpha,16);
+
+            .git {
+                border: 1px solid;
+            }
         }
 
         .right-sidebar {
