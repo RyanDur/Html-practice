@@ -72,76 +72,132 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background: #f7f3e8;
   position: relative;
 }
-/* line 12, ../sass/screen.scss */
+/* line 4, ../sass/_navRibbon.scss */
+.container nav.main {
+  width: 50%;
+  margin: 0 25% 0 25%;
+  padding: .5em;
+  background: #c2cccf;
+  border-top-left-radius: 14px 7px;
+  border-top-right-radius: 14px 7px;
+}
+/* line 11, ../sass/_navRibbon.scss */
+.container nav.main ul {
+  text-align: center;
+}
+/* line 13, ../sass/_navRibbon.scss */
+.container nav.main ul li {
+  display: inline-block;
+}
+/* line 19, ../sass/_navRibbon.scss */
+.container .nav-left {
+  position: absolute;
+  left: 0;
+  bottom: -14px;
+  width: 10px;
+  height: 14px;
+  background: #c2cccf;
+  -moz-border-radius-bottomleft: 100% 50%;
+  -webkit-border-bottom-left-radius: 100% 50%;
+  border-bottom-left-radius: 100% 50%;
+}
+/* line 28, ../sass/_navRibbon.scss */
+.container .nav-left:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 66%;
+  height: 66%;
+  background: #000;
+  -moz-border-radius-topleft: 100% 50%;
+  -webkit-border-top-left-radius: 100% 50%;
+  border-top-left-radius: 100% 50%;
+  -moz-border-radius-bottomleft: 100% 50%;
+  -webkit-border-bottom-left-radius: 100% 50%;
+  border-bottom-left-radius: 100% 50%;
+}
+/* line 40, ../sass/_navRibbon.scss */
+.container .nav-right {
+  position: absolute;
+  right: 0;
+  bottom: -14px;
+  width: 10px;
+  height: 14px;
+  background: #c2cccf;
+  -moz-border-radius-bottomright: 100% 50%;
+  -webkit-border-bottom-right-radius: 100% 50%;
+  border-bottom-right-radius: 100% 50%;
+}
+/* line 49, ../sass/_navRibbon.scss */
+.container .nav-right:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 66%;
+  height: 66%;
+  background: #000;
+  -moz-border-radius-topright: 100% 50%;
+  -webkit-border-top-right-radius: 100% 50%;
+  border-top-right-radius: 100% 50%;
+  -moz-border-radius-bottomright: 100% 50%;
+  -webkit-border-bottom-right-radius: 100% 50%;
+  border-bottom-right-radius: 100% 50%;
+}
+/* line 13, ../sass/screen.scss */
 .container header.main {
   text-align: center;
   padding: 39px;
   clear: both;
 }
-/* line 17, ../sass/screen.scss */
+/* line 18, ../sass/screen.scss */
 .container header.main h1 {
   text-shadow: -3px 3px 2px white;
   margin: 0 auto;
   font-family: Rye;
   font-size: 50px;
 }
-/* line 25, ../sass/screen.scss */
-.container nav.main {
-  border-top: 1px solid green;
-  border-bottom: 1px solid green;
-  margin: 0 25% 0 25%;
-  padding: .5em;
-  background: #f7f3e8;
-}
-/* line 32, ../sass/screen.scss */
-.container nav.main ul li {
-  display: inline-block;
-  margin: 0 auto;
-  text-align: center;
-}
-/* line 40, ../sass/screen.scss */
+/* line 26, ../sass/screen.scss */
 .container .content {
   font-family: Alegreya;
   width: 100%;
-  padding: 20px;
+  padding: 0 20px;
 }
-/* line 44, ../sass/screen.scss */
+/* line 30, ../sass/screen.scss */
 .container .content .main {
   background: white;
   padding: 20px;
   float: left;
   width: 50%;
 }
-/* line 51, ../sass/screen.scss */
+/* line 37, ../sass/screen.scss */
 .container .content .left-sidebar {
   width: 25%;
   float: left;
   padding: 20px;
 }
-/* line 55, ../sass/screen.scss */
+/* line 41, ../sass/screen.scss */
 .container .content .left-sidebar .git {
   border: 1px solid;
 }
-/* line 60, ../sass/screen.scss */
+/* line 46, ../sass/screen.scss */
 .container .content .right-sidebar {
   width: 25%;
   padding: 20px;
   float: left;
 }
-/* line 66, ../sass/screen.scss */
+/* line 52, ../sass/screen.scss */
 .container .content:after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* line 74, ../sass/screen.scss */
+/* line 60, ../sass/screen.scss */
 .sticky {
   position: fixed;
-  margin: 0;
 }
 
-/* line 79, ../sass/screen.scss */
+/* line 64, ../sass/screen.scss */
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

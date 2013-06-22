@@ -1,0 +1,60 @@
+$ribbonColor: rgba(194, 204, 207, 1);
+
+@mixin navRibbon {
+    nav.main {
+        width: 50%;
+        margin: 0 25% 0 25%;
+        padding: .5em;
+        background: $ribbonColor; 
+        border-top-left-radius: 14px 7px;
+        border-top-right-radius: 14px 7px;
+        ul {
+            text-align: center;
+            li { 
+                display: inline-block;
+            }
+        }
+    }
+
+    .nav-left {
+        position: absolute;
+        left: 0;  
+        bottom: -14px;
+        width: 10px;  
+        height: 14px;
+        background: $ribbonColor;
+        @include border-bottom-left-radius(100% 50%);
+
+        &:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            width: 66%;
+            height: 66%;
+            background: #000;
+            @include border-top-left-radius(100% 50%);
+            @include border-bottom-left-radius(100% 50%);
+        }
+    }
+
+    .nav-right {
+        position: absolute;
+        right: 0;
+        bottom: -14px;
+        width: 10px;
+        height: 14px;
+        background: $ribbonColor;
+        @include border-bottom-right-radius(100% 50%);
+
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 66%;
+            height: 66%;
+            background: #000;
+            @include border-top-right-radius(100% 50%);
+            @include border-bottom-right-radius(100% 50%);
+        }
+    }
+}
