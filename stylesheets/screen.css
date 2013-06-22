@@ -74,6 +74,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 4, ../sass/_navRibbon.scss */
 .container nav.main {
+  position: relative;
   width: 50%;
   margin: 0 25% 0 25%;
   padding: .5em;
@@ -81,15 +82,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-top-left-radius: 14px 7px;
   border-top-right-radius: 14px 7px;
 }
-/* line 11, ../sass/_navRibbon.scss */
+/* line 12, ../sass/_navRibbon.scss */
 .container nav.main ul {
   text-align: center;
 }
-/* line 13, ../sass/_navRibbon.scss */
+/* line 14, ../sass/_navRibbon.scss */
 .container nav.main ul li {
   display: inline-block;
 }
-/* line 19, ../sass/_navRibbon.scss */
+/* line 20, ../sass/_navRibbon.scss */
 .container .nav-left {
   position: absolute;
   left: 0;
@@ -101,7 +102,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -webkit-border-bottom-left-radius: 100% 50%;
   border-bottom-left-radius: 100% 50%;
 }
-/* line 28, ../sass/_navRibbon.scss */
+/* line 29, ../sass/_navRibbon.scss */
 .container .nav-left:after {
   content: '';
   position: absolute;
@@ -116,7 +117,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -webkit-border-bottom-left-radius: 100% 50%;
   border-bottom-left-radius: 100% 50%;
 }
-/* line 40, ../sass/_navRibbon.scss */
+/* line 41, ../sass/_navRibbon.scss */
 .container .nav-right {
   position: absolute;
   right: 0;
@@ -128,7 +129,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -webkit-border-bottom-right-radius: 100% 50%;
   border-bottom-right-radius: 100% 50%;
 }
-/* line 49, ../sass/_navRibbon.scss */
+/* line 50, ../sass/_navRibbon.scss */
 .container .nav-right:after {
   content: '';
   position: absolute;
@@ -194,7 +195,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* line 60, ../sass/screen.scss */
 .sticky {
-  position: fixed;
+  position: fixed !important;
 }
 
 /* line 64, ../sass/screen.scss */

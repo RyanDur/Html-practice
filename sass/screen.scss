@@ -58,7 +58,7 @@
 }
 
 .sticky {
-    position: fixed;
+    position: fixed !important;
 }
 
 *, *:after, *:before {
