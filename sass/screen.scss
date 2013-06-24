@@ -18,6 +18,10 @@ $background_color: rgba(247, 243, 232, 1);
 .sticky {
     position: fixed !important;
 }
+        .slideIn {
+            opacity: 1;
+            left: 0;
+        }
 
 *, *:after, *:before {
     @include box-sizing(border-box);

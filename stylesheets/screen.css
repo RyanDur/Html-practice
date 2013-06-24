@@ -105,25 +105,31 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: inline-block;
 }
 /* line 21, ../sass/_navRibbon.scss */
-.container .nav-left {
+.container .nav-left, .container .nav-right {
   position: absolute;
-  left: 0;
   bottom: -14px;
   width: 10px;
   height: 14px;
   background: #c2cccf;
-  -moz-border-radius-bottomleft: 100% 50%;
-  -webkit-border-bottom-left-radius: 100% 50%;
-  border-bottom-left-radius: 100% 50%;
 }
-/* line 30, ../sass/_navRibbon.scss */
-.container .nav-left:after {
+/* line 28, ../sass/_navRibbon.scss */
+.container .nav-left:after, .container .nav-right:after {
   content: '';
   position: absolute;
-  right: 0;
   width: 66%;
   height: 66%;
   background: #000;
+}
+/* line 37, ../sass/_navRibbon.scss */
+.container .nav-left {
+  -moz-border-radius-bottomleft: 100% 50%;
+  -webkit-border-bottom-left-radius: 100% 50%;
+  border-bottom-left-radius: 100% 50%;
+  left: 0;
+}
+/* line 42, ../sass/_navRibbon.scss */
+.container .nav-left:after {
+  right: 0;
   -moz-border-radius-topleft: 100% 50%;
   -webkit-border-top-left-radius: 100% 50%;
   border-top-left-radius: 100% 50%;
@@ -131,26 +137,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -webkit-border-bottom-left-radius: 100% 50%;
   border-bottom-left-radius: 100% 50%;
 }
-/* line 42, ../sass/_navRibbon.scss */
+/* line 49, ../sass/_navRibbon.scss */
 .container .nav-right {
-  position: absolute;
-  right: 0;
-  bottom: -14px;
-  width: 10px;
-  height: 14px;
-  background: #c2cccf;
   -moz-border-radius-bottomright: 100% 50%;
   -webkit-border-bottom-right-radius: 100% 50%;
   border-bottom-right-radius: 100% 50%;
+  right: 0;
 }
-/* line 51, ../sass/_navRibbon.scss */
+/* line 55, ../sass/_navRibbon.scss */
 .container .nav-right:after {
-  content: '';
-  position: absolute;
   left: 0;
-  width: 66%;
-  height: 66%;
-  background: #000;
   -moz-border-radius-topright: 100% 50%;
   -webkit-border-top-right-radius: 100% 50%;
   border-top-right-radius: 100% 50%;
@@ -172,46 +168,36 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   width: 50%;
 }
 /* line 15, ../sass/_content.scss */
-.container .content .sidebar-left {
+.container .content .sidebar-left, .container .content .sidebar-right {
   -webkit-transition: all 2s;
-  -webkit-transition-delay: 2s;
-  -moz-transition: all 2s 2s;
-  -o-transition: all 2s 2s;
-  transition: all 2s 2s;
+  -webkit-transition-delay: 1s;
+  -moz-transition: all 2s 1s;
+  -o-transition: all 2s 1s;
+  transition: all 2s 1s;
   position: relative;
-  border-right: 20px solid #f7f3e8;
   color: #f7f3e8;
   background: #918c8c;
   opacity: 0;
   float: left;
   width: 25%;
-  left: -25%;
   height: 500px;
   padding: 20px;
 }
 /* line 27, ../sass/_content.scss */
-.container .content .sidebar-left .git {
+.container .content .sidebar-left {
+  border-right: 20px solid #f7f3e8;
+  left: -25%;
+}
+/* line 31, ../sass/_content.scss */
+.container .content .sidebar-left .repos {
   border: 1px solid;
 }
-/* line 32, ../sass/_content.scss */
+/* line 36, ../sass/_content.scss */
 .container .content .sidebar-right {
-  -webkit-transition: all 2s;
-  -webkit-transition-delay: 2s;
-  -moz-transition: all 2s 2s;
-  -o-transition: all 2s 2s;
-  transition: all 2s 2s;
-  position: relative;
   border-left: 20px solid #f7f3e8;
-  color: #f7f3e8;
-  background: #928c8c;
-  opacity: 0;
-  float: left;
-  width: 25%;
   left: 25%;
-  height: 500px;
-  padding: 20px;
 }
-/* line 46, ../sass/_content.scss */
+/* line 42, ../sass/_content.scss */
 .container .content .slideIn {
   opacity: 1;
   left: 0;
@@ -222,7 +208,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   position: fixed !important;
 }
 
-/* line 22, ../sass/screen.scss */
+/* line 21, ../sass/screen.scss */
+.slideIn {
+  opacity: 1;
+  left: 0;
+}
+
+/* line 26, ../sass/screen.scss */
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

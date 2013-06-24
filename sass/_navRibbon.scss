@@ -18,43 +18,42 @@ $ribbonColor: rgba(194, 204, 207, 1);
         }
     }
 
-    .nav-left {
+    %ribbonCurl {
         position: absolute;
-        left: 0;  
         bottom: -14px;
-        width: 10px;  
+        width: 10px;
         height: 14px;
         background: $ribbonColor;
-        @include border-bottom-left-radius(100% 50%);
 
         &:after {
             content: '';
             position: absolute;
-            right: 0;
             width: 66%;
             height: 66%;
             background: #000;
+        }
+    }
+
+    .nav-left {
+        @include border-bottom-left-radius(100% 50%);
+        @extend %ribbonCurl;
+        left: 0;
+
+        &:after {
+            right: 0;
             @include border-top-left-radius(100% 50%);
             @include border-bottom-left-radius(100% 50%);
         }
     }
 
     .nav-right {
-        position: absolute;
-        right: 0;
-        bottom: -14px;
-        width: 10px;
-        height: 14px;
-        background: $ribbonColor;
+        @extend %ribbon;
         @include border-bottom-right-radius(100% 50%);
+        @extend %ribbonCurl;
+        right: 0;
 
         &:after {
-            content: '';
-            position: absolute;
             left: 0;
-            width: 66%;
-            height: 66%;
-            background: #000;
             @include border-top-right-radius(100% 50%);
             @include border-bottom-right-radius(100% 50%);
         }

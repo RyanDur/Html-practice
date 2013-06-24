@@ -31,8 +31,6 @@ var stickySection = function(container, section, options) {
 };
 
 $(function() {
-    //$("nav").css('opacity', 0);
-    //reveal($('nav'));
     var options = {top_spacing: 15, waypoint_offset: 150};
     stickySection($(".nav-container"), $("nav"), options);
     slidePanelsIn();
