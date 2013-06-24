@@ -5,56 +5,14 @@
 
 @import "base";
 
+$background_color: rgba(247, 243, 232, 1);
+
 .container {
-    background: rgba(247, 243, 232, 1);
+    background: $background_color;
     position: relative;
+    @include header;
     @include navRibbon;
-
-    header.main {
-        text-align: center;
-        padding: 39px;
-        clear: both;
-
-        h1 {
-            @include text-shadow(-3px 3px 2px rgba(255, 255, 255, 1));
-            margin: 0 auto;
-            font-family: Rye;
-            font-size: 50px;
-        }
-    }
-
-    .content {
-        font-family: Alegreya;
-        width: 100%;
-        padding: 0 20px;
-        .main {
-            background: rgba(255, 255, 255, 1);
-            padding: 20px;
-            float: left;
-            width: 50%;
-        }
-
-        .left-sidebar {
-            width: 25%;
-            float: left;
-            padding: 20px;
-            .git {
-                border: 1px solid;
-            }
-        }
-
-        .right-sidebar {
-            width: 25%;
-            padding: 20px;
-            float: left;
-        }
-        
-        &:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-    }
+    @include content;
 }
 
 .sticky {
@@ -62,7 +20,7 @@
 }
 
 *, *:after, *:before {
-  @include box-sizing(border-box);
+    @include box-sizing(border-box);
 }
 
 

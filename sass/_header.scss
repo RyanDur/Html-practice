@@ -1,0 +1,16 @@
+@mixin header {
+
+    header.main {
+        text-align: center;
+        padding: 39px;
+        clear: both;
+
+
+        h1 {
+            @include text-shadow(-3px 3px 2px rgba(255, 255, 255, 1));
+            margin: 0 auto;
+            font-family: Rye;
+            font-size: 50px;
+        }
+    }
+}

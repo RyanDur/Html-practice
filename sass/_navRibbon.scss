@@ -2,6 +2,7 @@ $ribbonColor: rgba(194, 204, 207, 1);
 
 @mixin navRibbon {
     nav.main {
+        z-index: 42;
         position: relative;
         width: 50%;
         margin: 0 25% 0 25%;

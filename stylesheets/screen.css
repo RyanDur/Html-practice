@@ -67,13 +67,27 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 8, ../sass/screen.scss */
+/* line 10, ../sass/screen.scss */
 .container {
   background: #f7f3e8;
   position: relative;
 }
+/* line 3, ../sass/_header.scss */
+.container header.main {
+  text-align: center;
+  padding: 39px;
+  clear: both;
+}
+/* line 9, ../sass/_header.scss */
+.container header.main h1 {
+  text-shadow: -3px 3px 2px white;
+  margin: 0 auto;
+  font-family: Rye;
+  font-size: 50px;
+}
 /* line 4, ../sass/_navRibbon.scss */
 .container nav.main {
+  z-index: 42;
   position: relative;
   width: 50%;
   margin: 0 25% 0 25%;
@@ -82,15 +96,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-top-left-radius: 14px 7px;
   border-top-right-radius: 14px 7px;
 }
-/* line 12, ../sass/_navRibbon.scss */
+/* line 13, ../sass/_navRibbon.scss */
 .container nav.main ul {
   text-align: center;
 }
-/* line 14, ../sass/_navRibbon.scss */
+/* line 15, ../sass/_navRibbon.scss */
 .container nav.main ul li {
   display: inline-block;
 }
-/* line 20, ../sass/_navRibbon.scss */
+/* line 21, ../sass/_navRibbon.scss */
 .container .nav-left {
   position: absolute;
   left: 0;
@@ -102,7 +116,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -webkit-border-bottom-left-radius: 100% 50%;
   border-bottom-left-radius: 100% 50%;
 }
-/* line 29, ../sass/_navRibbon.scss */
+/* line 30, ../sass/_navRibbon.scss */
 .container .nav-left:after {
   content: '';
   position: absolute;
@@ -117,7 +131,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -webkit-border-bottom-left-radius: 100% 50%;
   border-bottom-left-radius: 100% 50%;
 }
-/* line 41, ../sass/_navRibbon.scss */
+/* line 42, ../sass/_navRibbon.scss */
 .container .nav-right {
   position: absolute;
   right: 0;
@@ -129,7 +143,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -webkit-border-bottom-right-radius: 100% 50%;
   border-bottom-right-radius: 100% 50%;
 }
-/* line 50, ../sass/_navRibbon.scss */
+/* line 51, ../sass/_navRibbon.scss */
 .container .nav-right:after {
   content: '';
   position: absolute;
@@ -144,61 +158,71 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -webkit-border-bottom-right-radius: 100% 50%;
   border-bottom-right-radius: 100% 50%;
 }
-/* line 13, ../sass/screen.scss */
-.container header.main {
-  text-align: center;
-  padding: 39px;
-  clear: both;
-}
-/* line 18, ../sass/screen.scss */
-.container header.main h1 {
-  text-shadow: -3px 3px 2px white;
-  margin: 0 auto;
-  font-family: Rye;
-  font-size: 50px;
-}
-/* line 26, ../sass/screen.scss */
+/* line 3, ../sass/_content.scss */
 .container .content {
   font-family: Alegreya;
   width: 100%;
   padding: 0 20px;
 }
-/* line 30, ../sass/screen.scss */
+/* line 8, ../sass/_content.scss */
 .container .content .main {
   background: white;
   padding: 20px;
   float: left;
   width: 50%;
 }
-/* line 37, ../sass/screen.scss */
-.container .content .left-sidebar {
-  width: 25%;
+/* line 15, ../sass/_content.scss */
+.container .content .sidebar-left {
+  -webkit-transition: all 2s;
+  -webkit-transition-delay: 2s;
+  -moz-transition: all 2s 2s;
+  -o-transition: all 2s 2s;
+  transition: all 2s 2s;
+  position: relative;
+  border-right: 20px solid #f7f3e8;
+  color: #f7f3e8;
+  background: #918c8c;
+  opacity: 0;
   float: left;
+  width: 25%;
+  left: -25%;
+  height: 500px;
   padding: 20px;
 }
-/* line 41, ../sass/screen.scss */
-.container .content .left-sidebar .git {
+/* line 27, ../sass/_content.scss */
+.container .content .sidebar-left .git {
   border: 1px solid;
 }
-/* line 46, ../sass/screen.scss */
-.container .content .right-sidebar {
-  width: 25%;
-  padding: 20px;
+/* line 32, ../sass/_content.scss */
+.container .content .sidebar-right {
+  -webkit-transition: all 2s;
+  -webkit-transition-delay: 2s;
+  -moz-transition: all 2s 2s;
+  -o-transition: all 2s 2s;
+  transition: all 2s 2s;
+  position: relative;
+  border-left: 20px solid #f7f3e8;
+  color: #f7f3e8;
+  background: #928c8c;
+  opacity: 0;
   float: left;
+  width: 25%;
+  left: 25%;
+  height: 500px;
+  padding: 20px;
 }
-/* line 52, ../sass/screen.scss */
-.container .content:after {
-  content: "";
-  display: table;
-  clear: both;
+/* line 46, ../sass/_content.scss */
+.container .content .slideIn {
+  opacity: 1;
+  left: 0;
 }
 
-/* line 60, ../sass/screen.scss */
+/* line 18, ../sass/screen.scss */
 .sticky {
   position: fixed !important;
 }
 
-/* line 64, ../sass/screen.scss */
+/* line 22, ../sass/screen.scss */
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

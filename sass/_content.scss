@@ -1,0 +1,61 @@
+@mixin content {
+
+    .content {
+        font-family: Alegreya;
+        width: 100%;
+        padding: 0 20px;
+
+        .main {
+            background: rgba(255, 255, 255, 1);
+            padding: 20px;
+            float: left;
+            width: 50%;
+        }
+
+        .sidebar-left {
+            @include transition(all 2s 2s);
+            position: relative;
+            border-right: 20px solid $background_color;
+            color: $background_color;
+            background: rgba(145, 140, 140, 1);
+            opacity: 0;
+            float: left;
+            width: 25%;
+            left: -25%;
+            height: 500px;
+            padding: 20px;
+            .git {
+                border: 1px solid;
+            }
+        }
+
+        .sidebar-right {
+            @include transition(all 2s 2s);
+            position: relative;
+            border-left: 20px solid $background_color;
+            color: $background_color;
+            background: rgba(146, 140, 140, 1);
+            opacity: 0;
+            float: left;
+            width: 25%;
+            left: 25%;
+            height: 500px;
+            padding: 20px;
+        }
+
+        .slideIn {
+            opacity: 1;
+            left: 0;
+        }
+
+        .sidebar-left-container {
+            // &:after {
+                //     visibility: hidden;
+                //     position: relative;
+                //     float:left;
+                //     width: 25%;
+                //     content: ".";
+            // }
+        }
+    }
+}
