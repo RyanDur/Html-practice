@@ -6,6 +6,8 @@
         padding: 0 20px;
 
         .main {
+            position: relative;
+            z-index: 41;
             background: rgba(255, 255, 255, 1);
             padding: 20px;
             float: left;
@@ -27,7 +29,7 @@
         .sidebar-left {
             @extend %sidebar;
             border-right: 20px solid $background_color;
-            left: -25%;
+            left: 25%;
             .repos {
                 border: 1px solid;
             }
@@ -36,7 +38,7 @@
         .sidebar-right {
             @extend %sidebar;
             border-left: 20px solid $background_color;
-            left: 25%;
+            left: -25%;
         }
 
         .slideIn {

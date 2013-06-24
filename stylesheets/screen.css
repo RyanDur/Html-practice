@@ -93,7 +93,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   margin: 0 25% 0 25%;
   padding: .5em;
   background: #c2cccf;
+  -moz-border-radius-topleft: 14px 7px;
+  -webkit-border-top-left-radius: 14px 7px;
   border-top-left-radius: 14px 7px;
+  -moz-border-radius-topright: 14px 7px;
+  -webkit-border-top-right-radius: 14px 7px;
   border-top-right-radius: 14px 7px;
 }
 /* line 13, ../sass/_navRibbon.scss */
@@ -144,7 +148,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-bottom-right-radius: 100% 50%;
   right: 0;
 }
-/* line 55, ../sass/_navRibbon.scss */
+/* line 54, ../sass/_navRibbon.scss */
 .container .nav-right:after {
   left: 0;
   -moz-border-radius-topright: 100% 50%;
@@ -162,12 +166,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 8, ../sass/_content.scss */
 .container .content .main {
+  position: relative;
+  z-index: 41;
   background: white;
   padding: 20px;
   float: left;
   width: 50%;
 }
-/* line 15, ../sass/_content.scss */
+/* line 17, ../sass/_content.scss */
 .container .content .sidebar-left, .container .content .sidebar-right {
   -webkit-transition: all 2s;
   -webkit-transition-delay: 1s;
@@ -183,21 +189,21 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   height: 500px;
   padding: 20px;
 }
-/* line 27, ../sass/_content.scss */
+/* line 29, ../sass/_content.scss */
 .container .content .sidebar-left {
   border-right: 20px solid #f7f3e8;
-  left: -25%;
+  left: 25%;
 }
-/* line 31, ../sass/_content.scss */
+/* line 33, ../sass/_content.scss */
 .container .content .sidebar-left .repos {
   border: 1px solid;
 }
-/* line 36, ../sass/_content.scss */
+/* line 38, ../sass/_content.scss */
 .container .content .sidebar-right {
   border-left: 20px solid #f7f3e8;
-  left: 25%;
+  left: -25%;
 }
-/* line 42, ../sass/_content.scss */
+/* line 44, ../sass/_content.scss */
 .container .content .slideIn {
   opacity: 1;
   left: 0;

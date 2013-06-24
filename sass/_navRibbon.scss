@@ -8,8 +8,8 @@ $ribbonColor: rgba(194, 204, 207, 1);
         margin: 0 25% 0 25%;
         padding: .5em;
         background: $ribbonColor; 
-        border-top-left-radius: 14px 7px;
-        border-top-right-radius: 14px 7px;
+        @include border-top-left-radius(14px 7px);
+        @include border-top-right-radius(14px 7px);
         ul {
             text-align: center;
             li { 
@@ -47,7 +47,6 @@ $ribbonColor: rgba(194, 204, 207, 1);
     }
 
     .nav-right {
-        @extend %ribbon;
         @include border-bottom-right-radius(100% 50%);
         @extend %ribbonCurl;
         right: 0;
