@@ -2,10 +2,14 @@ var reveal = function(section) {
     section.delay(1000).animate({opacity: 1}, 1500);
 };
 
+var sortByDate = function(a, b) {
+    return new Date(a.updated_at) < new Date(b.updated_at);
+};
+
 var slidePanelsIn = function() {
     $('.sidebar-left').addClass('slideIn');
     $('.sidebar-right').addClass('slideIn');
-}
+};
 
 var stickySection = function(container, section, options) {
     container.waypoint({
@@ -40,7 +44,7 @@ var getRepo = function() {
             contentType: "application/json",
             dataType: 'jsonp',
             success: function(json) {
-                console.dir(json.data[0].name);
+                json.data.sort(sortByDate);
                 $.each(json.data, function(index, val) {
                     $('.git').append("<li><a href="+ val.html_url +
                     " target=_blank>"+ val.name +"</a></li>");
