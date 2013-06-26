@@ -186,7 +186,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   opacity: 0;
   float: left;
   width: 25%;
-  height: 500px;
+  height: auto;
   padding: 20px;
 }
 /* line 29, ../sass/_content.scss */
@@ -214,13 +214,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   position: fixed !important;
 }
 
-/* line 21, ../sass/screen.scss */
+/* line 22, ../sass/screen.scss */
 .slideIn {
   opacity: 1;
   left: 0;
 }
 
-/* line 26, ../sass/screen.scss */
+/* line 27, ../sass/screen.scss */
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
