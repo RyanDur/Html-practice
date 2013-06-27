@@ -8,8 +8,7 @@ var forEach = function(array, func) {
     }
 };
 
-var sortByDate = function(a, b) {
-    console.log(new Date(a.updated_at));
+var compareDates = function(a, b) {
     return (a.updated_at > b.updated_at) ? 1 : ((a.updated_at < b.updated_at) ? -1 : 0); 
 };
 
@@ -49,7 +48,7 @@ var gitRepos = {
     contentType: "application/json",
     dataType: 'jsonp',
     success: function(json) {
-        json.data.sort(sortByDate).reverse();
+        json.data.sort(compareDates).reverse();
         forEach(json.data, function(val) {
             $('.git').append("<li><a href="+ val.html_url +
             " target=_blank>"+ val.name +"</a></li>");
