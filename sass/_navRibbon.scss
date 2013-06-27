@@ -6,10 +6,10 @@ $ribbonColor: rgba(194, 204, 207, 1);
         position: relative;
         width: 50%;
         margin: 0 25% 0 25%;
-        padding: .5em;
+        padding: 0.5em;
         background: $ribbonColor; 
-        @include border-top-left-radius(14px 7px);
-        @include border-top-right-radius(14px 7px);
+        @include border-top-left-radius(0.7em 0.35em);
+        @include border-top-right-radius(0.7em 0.35em);
         ul {
             text-align: center;
             li { 
@@ -20,9 +20,9 @@ $ribbonColor: rgba(194, 204, 207, 1);
 
     %ribbonCurl {
         position: absolute;
-        bottom: -14px;
-        width: 10px;
-        height: 14px;
+        bottom: -0.7em;
+        width: 0.5em;
+        height: 0.7em;
         background: $ribbonColor;
 
         &:after {

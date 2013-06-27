@@ -3,13 +3,13 @@
     .content {
         font-family: Alegreya;
         width: 100%;
-        padding: 0 20px;
+        padding: 0 1em;
 
         .main {
             position: relative;
             z-index: 41;
             background: rgba(255, 255, 255, 1);
-            padding: 20px;
+            padding: 1em;
             float: left;
             width: 50%;
         }
@@ -23,7 +23,7 @@
             float: left;
             width: 25%;
             height: auto;
-            padding: 20px;
+            padding: 1em;
         }
 
         .sidebar-left {
@@ -31,13 +31,13 @@
             border-right: 20px solid $background_color;
             left: 25%;
             .repos {
-                border: 1px solid;
+                border: 0.050em solid;
             }
         }
 
         .sidebar-right {
             @extend %sidebar;
-            border-left: 20px solid $background_color;
+            border-left: 1em solid $background_color;
             left: -25%;
         }
 
