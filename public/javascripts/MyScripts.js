@@ -2,15 +2,15 @@ var reveal = function(section) {
     section.delay(1000).animate({opacity: 1}, 1500);
 };
 
-var parseDate = function(input) {
-    var parts = input.match(/(\d+)/g);
-    return new Date(parts[0], parts[1]-1, parts[2], parts[3], parts[4], parts[5]); //     months are 0-based
-}
+var forEach = function(array, func) {
+    for(var i = 0; i < array.length; i++ ) {
+        func(array[i]);
+    }
+};
 
 var sortByDate = function(a, b) {
-    //(a > b) ? 1 : ( (a > b) ? -1 : 0  );
-    //return (a.updated_at > b.updated_at) ? 1 : ((a.updated_at > b.updated_at) ? -1 : 0); 
-    return 2;
+    console.log(new Date(a.updated_at));
+    return (a.updated_at > b.updated_at) ? 1 : ((a.updated_at < b.updated_at) ? -1 : 0); 
 };
 
 var slidePanelsIn = function() {
@@ -49,8 +49,8 @@ var gitRepos = {
     contentType: "application/json",
     dataType: 'jsonp',
     success: function(json) {
-        json.data.sort(sortByDate);
-        $.each(json.data, function(index, val) {
+        json.data.sort(sortByDate).reverse();
+        forEach(json.data, function(val) {
             $('.git').append("<li><a href="+ val.html_url +
             " target=_blank>"+ val.name +"</a></li>");
         })
