@@ -2,8 +2,15 @@ var reveal = function(section) {
     section.delay(1000).animate({opacity: 1}, 1500);
 };
 
+var parseDate = function(input) {
+    var parts = input.match(/(\d+)/g);
+    return new Date(parts[0], parts[1]-1, parts[2], parts[3], parts[4], parts[5]); //     months are 0-based
+}
+
 var sortByDate = function(a, b) {
-    return new Date(a.updated_at) < new Date(b.updated_at);
+    //(a > b) ? 1 : ( (a > b) ? -1 : 0  );
+    //return (a.updated_at > b.updated_at) ? 1 : ((a.updated_at > b.updated_at) ? -1 : 0); 
+    return 2;
 };
 
 var slidePanelsIn = function() {
@@ -34,29 +41,26 @@ var stickySection = function(container, section, options) {
     });
 };
 
-var getRepo = function() {
-    var url = 'https://api.github.com/users/RyanDur/repos'
-        $.ajax({
-            type: 'GET',
-            url: url,
-            cache: false,
-            async: false,
-            contentType: "application/json",
-            dataType: 'jsonp',
-            success: function(json) {
-                json.data.sort(sortByDate);
-                $.each(json.data, function(index, val) {
-                    $('.git').append("<li><a href="+ val.html_url +
-                    " target=_blank>"+ val.name +"</a></li>");
-                })
-            }
-        });
+var gitRepos = {
+    type: 'GET',
+    url: 'https://api.github.com/users/RyanDur/repos',
+    cache: false,
+    async: false,
+    contentType: "application/json",
+    dataType: 'jsonp',
+    success: function(json) {
+        json.data.sort(sortByDate);
+        $.each(json.data, function(index, val) {
+            $('.git').append("<li><a href="+ val.html_url +
+            " target=_blank>"+ val.name +"</a></li>");
+        })
+    }
 };
 
 $(function() {
     var options = {top_spacing: 15, waypoint_offset: 150};
     stickySection($(".nav-container"), $("nav"), options);
     slidePanelsIn();
-    getRepo();
+    $.ajax(gitRepos);
 });
 
