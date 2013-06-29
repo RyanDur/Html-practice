@@ -1,5 +1,3 @@
-$ribbonColor: rgba(194, 204, 207, 1);
-
 @mixin navRibbon {
     nav.main {
         z-index: 42;
@@ -14,6 +12,7 @@ $ribbonColor: rgba(194, 204, 207, 1);
             text-align: center;
             li { 
                 display: inline-block;
+                margin: 0 2em;
             }
         }
     }

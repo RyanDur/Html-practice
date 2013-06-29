@@ -28,10 +28,27 @@
 
         .sidebar-left {
             @extend %sidebar;
-            border-right: 20px solid $background_color;
+            border-right: 1em solid $background_color;
             left: 25%;
             .repos {
-                border: 0.050em solid;
+                text-align: center;
+                height: 11em;
+                margin: 0 auto;
+                .git {
+                    height: 100%;
+                    li {
+                        margin: 0.5em;
+                        background: $ribbonColor;
+                        padding: 0.25em 0 0.25em;
+                        a {
+                            text-decoration: none;
+                            color: black;
+                        }
+                        &:hover {
+                            @include background(scale-lightness($ribbonColor, 20));
+                        }
+                    }
+                }
             }
         }
 

@@ -40,6 +40,35 @@ var stickySection = function(container, section, options) {
     });
 };
 
+var pages = [];
+var page_num = 0;
+
+var next = function() {
+    forEach(pages[++page_num], appendGit)
+};
+
+var prev = function() {
+    forEach(pages[--page_num], appendGit)
+};
+
+var paginate = function(links) {
+    var show_per_page = 4;
+    while(links.length > 0) {
+        var page = [];
+        for(var j = 0; j < show_per_page; j++){
+            if (links[0] != undefined) {
+                page.push(links.shift());
+            }
+        };
+        pages.push(page);
+    };
+};
+
+var appendGit = function(val) {
+    $('.git').append("<li><a href="+ val.html_url +
+    " target=_blank>"+ val.name +"</a></li>");
+}
+
 var gitRepos = {
     type: 'GET',
     url: 'https://api.github.com/users/RyanDur/repos',
@@ -49,10 +78,8 @@ var gitRepos = {
     dataType: 'jsonp',
     success: function(json) {
         json.data.sort(compareDates).reverse();
-        forEach(json.data, function(val) {
-            $('.git').append("<li><a href="+ val.html_url +
-            " target=_blank>"+ val.name +"</a></li>");
-        })
+        paginate(json.data);
+        forEach(pages[0], appendGit);
     }
 };
 
@@ -61,5 +88,27 @@ $(function() {
     stickySection($(".nav-container"), $("nav"), options);
     slidePanelsIn();
     $.ajax(gitRepos);
+    $('.repos').on('click', '.next', function(event) {
+        event.preventDefault();
+        if (page_num != pages.length -1) {
+            var git = $(this).closest('.repos').find('.git');
+            git.hide('slide', {direction: 'left'}, function() {
+                git.find('li').remove();
+                next();
+            });
+            git.fadeIn();
+        }
+    });
+    $('.repos').on('click', '.prev', function() {
+        event.preventDefault();
+        if (page_num != 0) {
+            var git = $(this).closest('.repos').find('.git');
+            git.hide('slide', {direction: 'right'}, function() {
+                git.find('li').remove();
+                prev();
+            });
+            git.fadeIn();
+        }
+    });
 });
 

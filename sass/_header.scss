@@ -2,12 +2,12 @@
 
     header.main {
         text-align: center;
-        padding: 1.95em;
+        padding: 39px;
         clear: both;
 
 
         h1 {
-            @include text-shadow(-0.15em 0.15em 0.1em rgba(255, 255, 255, 1));
+            @include text-shadow(-0.07em 0.07em 0.1em rgba(138, 135, 135, 0.59));
             margin: 0 auto;
             font-family: Rye;
             font-size: 3em;

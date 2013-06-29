@@ -67,7 +67,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 11, ../sass/screen.scss */
+/* line 13, ../sass/screen.scss */
 .container {
   background: #f7f3e8;
   position: relative;
@@ -75,17 +75,17 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 3, ../sass/_header.scss */
 .container header.main {
   text-align: center;
-  padding: 1.95em;
+  padding: 39px;
   clear: both;
 }
 /* line 9, ../sass/_header.scss */
 .container header.main h1 {
-  text-shadow: -0.15em 0.15em 0.1em white;
+  text-shadow: -0.07em 0.07em 0.1em rgba(138, 135, 135, 0.59);
   margin: 0 auto;
   font-family: Rye;
   font-size: 3em;
 }
-/* line 4, ../sass/_navRibbon.scss */
+/* line 2, ../sass/_navRibbon.scss */
 .container nav.main {
   z-index: 42;
   position: relative;
@@ -100,15 +100,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -webkit-border-top-right-radius: 0.7em 0.35em;
   border-top-right-radius: 0.7em 0.35em;
 }
-/* line 13, ../sass/_navRibbon.scss */
+/* line 11, ../sass/_navRibbon.scss */
 .container nav.main ul {
   text-align: center;
 }
-/* line 15, ../sass/_navRibbon.scss */
+/* line 13, ../sass/_navRibbon.scss */
 .container nav.main ul li {
   display: inline-block;
+  margin: 0 2em;
 }
-/* line 21, ../sass/_navRibbon.scss */
+/* line 20, ../sass/_navRibbon.scss */
 .container .nav-left, .container .nav-right {
   position: absolute;
   bottom: -0.7em;
@@ -116,7 +117,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   height: 0.7em;
   background: #c2cccf;
 }
-/* line 28, ../sass/_navRibbon.scss */
+/* line 27, ../sass/_navRibbon.scss */
 .container .nav-left:after, .container .nav-right:after {
   content: '';
   position: absolute;
@@ -124,14 +125,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   height: 66%;
   background: #000;
 }
-/* line 37, ../sass/_navRibbon.scss */
+/* line 36, ../sass/_navRibbon.scss */
 .container .nav-left {
   -moz-border-radius-bottomleft: 100% 50%;
   -webkit-border-bottom-left-radius: 100% 50%;
   border-bottom-left-radius: 100% 50%;
   left: 0;
 }
-/* line 42, ../sass/_navRibbon.scss */
+/* line 41, ../sass/_navRibbon.scss */
 .container .nav-left:after {
   right: 0;
   -moz-border-radius-topleft: 100% 50%;
@@ -141,14 +142,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -webkit-border-bottom-left-radius: 100% 50%;
   border-bottom-left-radius: 100% 50%;
 }
-/* line 49, ../sass/_navRibbon.scss */
+/* line 48, ../sass/_navRibbon.scss */
 .container .nav-right {
   -moz-border-radius-bottomright: 100% 50%;
   -webkit-border-bottom-right-radius: 100% 50%;
   border-bottom-right-radius: 100% 50%;
   right: 0;
 }
-/* line 54, ../sass/_navRibbon.scss */
+/* line 53, ../sass/_navRibbon.scss */
 .container .nav-right:after {
   left: 0;
   -moz-border-radius-topright: 100% 50%;
@@ -191,36 +192,57 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 29, ../sass/_content.scss */
 .container .content .sidebar-left {
-  border-right: 20px solid #f7f3e8;
+  border-right: 1em solid #f7f3e8;
   left: 25%;
 }
 /* line 33, ../sass/_content.scss */
 .container .content .sidebar-left .repos {
-  border: 0.050em solid;
+  text-align: center;
+  height: 11em;
+  margin: 0 auto;
 }
-/* line 38, ../sass/_content.scss */
+/* line 37, ../sass/_content.scss */
+.container .content .sidebar-left .repos .git {
+  height: 100%;
+}
+/* line 39, ../sass/_content.scss */
+.container .content .sidebar-left .repos .git li {
+  margin: 0.5em;
+  background: #c2cccf;
+  padding: 0.25em 0 0.25em;
+}
+/* line 43, ../sass/_content.scss */
+.container .content .sidebar-left .repos .git li a {
+  text-decoration: none;
+  color: black;
+}
+/* line 47, ../sass/_content.scss */
+.container .content .sidebar-left .repos .git li:hover {
+  background: #ced6d9;
+}
+/* line 55, ../sass/_content.scss */
 .container .content .sidebar-right {
   border-left: 1em solid #f7f3e8;
   left: -25%;
 }
-/* line 44, ../sass/_content.scss */
+/* line 61, ../sass/_content.scss */
 .container .content .slideIn {
   opacity: 1;
   left: 0;
 }
 
-/* line 19, ../sass/screen.scss */
+/* line 21, ../sass/screen.scss */
 .sticky {
   position: fixed !important;
 }
 
-/* line 23, ../sass/screen.scss */
+/* line 25, ../sass/screen.scss */
 .slideIn {
   opacity: 1;
   left: 0;
 }
 
-/* line 28, ../sass/screen.scss */
+/* line 30, ../sass/screen.scss */
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
