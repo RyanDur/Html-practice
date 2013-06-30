@@ -34,6 +34,31 @@
                 text-align: center;
                 height: 11em;
                 margin: 0 auto;
+                nav.repo {
+                    display: inline-block;
+                    margin: 0 auto;
+                    .prev {
+                        display: inherit;
+                        @include arrow_box(right);
+                        @include border-radius(0 10px 10px 0);
+                    }
+                    .page-count {
+                        display: inherit;
+                        background: $ribbonColor;
+                        color: black;
+                        font-size: 0.75em;
+                        padding: 0.2em 1em 0.2em 1em;
+                        position: relative;
+                        bottom: .3em;
+                        margin: 0 1em 0 1em;
+                        @include border-radius(15em);
+                    }
+                    .next {
+                        display: inherit;
+                        @include arrow_box(left);
+                        @include border-radius(10px 0 0 10px);
+                    }
+                }
                 .git {
                     height: 100%;
                     li {

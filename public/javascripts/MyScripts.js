@@ -12,6 +12,8 @@ var compareDates = function(a, b) {
     return (a.updated_at > b.updated_at) ? 1 : ((a.updated_at < b.updated_at) ? -1 : 0); 
 };
 
+compareDates
+
 var slidePanelsIn = function() {
     $('.sidebar-left').addClass('slideIn');
     $('.sidebar-right').addClass('slideIn');
@@ -23,15 +25,15 @@ var stickySection = function(container, section, options) {
                      if (direction == 'down'){
                          container.css({'height': section.outerHeight()});
                          section.stop()
-        .addClass('sticky')
-        .css('top', -section.outerHeight())
-        .animate({'top': options.top_spacing});
+                        .addClass('sticky')
+                        .css('top', -section.outerHeight())
+                        .animate({'top': options.top_spacing});
                      } else {
                          container.css({'height':'auto'});
                          section.stop()
-        .removeClass('sticky')
-        .css("top", section.outerHeight() + options.waypoint_offset)
-        .animate({'top': ""});
+                         .removeClass('sticky')
+                         .css("top", section.outerHeight() + options.waypoint_offset)
+                         .animate({'top': ""});
                      }
                  },
         offset: function() {
@@ -49,6 +51,11 @@ var next = function() {
 
 var prev = function() {
     forEach(pages[--page_num], appendGit)
+};
+
+var pageCount = function() {
+    var page_number = page_num + 1;
+    $('.page-count').text((page_number) + "/" + pages.length);
 };
 
 var paginate = function(links) {
@@ -80,12 +87,13 @@ var gitRepos = {
         json.data.sort(compareDates).reverse();
         paginate(json.data);
         forEach(pages[0], appendGit);
+        pageCount();
     }
 };
 
 $(function() {
     var options = {top_spacing: 15, waypoint_offset: 150};
-    stickySection($(".nav-container"), $("nav"), options);
+    stickySection($(".nav-container"), $("nav.main"), options);
     slidePanelsIn();
     $.ajax(gitRepos);
     $('.repos').on('click', '.next', function(event) {
@@ -95,6 +103,7 @@ $(function() {
             git.hide('slide', {direction: 'left'}, function() {
                 git.find('li').remove();
                 next();
+                pageCount();
             });
             git.fadeIn();
         }
@@ -106,6 +115,7 @@ $(function() {
             git.hide('slide', {direction: 'right'}, function() {
                 git.find('li').remove();
                 prev();
+                pageCount();
             });
             git.fadeIn();
         }

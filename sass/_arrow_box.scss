@@ -1,0 +1,22 @@
+@mixin arrow_box($direction) {
+    width: 4em;
+    color: black;
+    font-size: .75em;
+    height: 1em;
+    position: relative;
+    bottom: 0.3em;
+    background: $ribbonColor;
+    &:after {
+        content: "";
+        position: absolute;
+        #{$direction}: 100%;
+        width: 0;
+        height: 0;
+        border-top: .5em solid transparent;
+        border-bottom: .5em solid transparent;
+        border-#{$direction}: .5em solid $ribbonColor;
+    }
+    &:hover {
+        color: 0.5em solid scale-lightness($ribbonColor,50);
+    }
+}

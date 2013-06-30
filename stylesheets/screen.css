@@ -202,30 +202,113 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   margin: 0 auto;
 }
 /* line 37, ../sass/_content.scss */
+.container .content .sidebar-left .repos nav.repo {
+  display: inline-block;
+  margin: 0 auto;
+}
+/* line 40, ../sass/_content.scss */
+.container .content .sidebar-left .repos nav.repo .prev {
+  display: inherit;
+  width: 4em;
+  color: black;
+  font-size: .75em;
+  height: 1em;
+  position: relative;
+  bottom: 0.3em;
+  background: #c2cccf;
+  -webkit-border-radius: 0 10px 10px 0;
+  -moz-border-radius: 0 10px 10px 0;
+  -ms-border-radius: 0 10px 10px 0;
+  -o-border-radius: 0 10px 10px 0;
+  border-radius: 0 10px 10px 0;
+}
+/* line 9, ../sass/_arrow_box.scss */
+.container .content .sidebar-left .repos nav.repo .prev:after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  width: 0;
+  height: 0;
+  border-top: .5em solid transparent;
+  border-bottom: .5em solid transparent;
+  border-right: 0.5em solid #c2cccf;
+}
+/* line 19, ../sass/_arrow_box.scss */
+.container .content .sidebar-left .repos nav.repo .prev:hover {
+  color: 0.5em solid #e0e6e7;
+}
+/* line 45, ../sass/_content.scss */
+.container .content .sidebar-left .repos nav.repo .page-count {
+  display: inherit;
+  background: #c2cccf;
+  color: black;
+  font-size: 0.75em;
+  padding: 0.2em 1em 0.2em 1em;
+  position: relative;
+  bottom: .3em;
+  margin: 0 1em 0 1em;
+  -webkit-border-radius: 15em;
+  -moz-border-radius: 15em;
+  -ms-border-radius: 15em;
+  -o-border-radius: 15em;
+  border-radius: 15em;
+}
+/* line 56, ../sass/_content.scss */
+.container .content .sidebar-left .repos nav.repo .next {
+  display: inherit;
+  width: 4em;
+  color: black;
+  font-size: .75em;
+  height: 1em;
+  position: relative;
+  bottom: 0.3em;
+  background: #c2cccf;
+  -webkit-border-radius: 10px 0 0 10px;
+  -moz-border-radius: 10px 0 0 10px;
+  -ms-border-radius: 10px 0 0 10px;
+  -o-border-radius: 10px 0 0 10px;
+  border-radius: 10px 0 0 10px;
+}
+/* line 9, ../sass/_arrow_box.scss */
+.container .content .sidebar-left .repos nav.repo .next:after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  width: 0;
+  height: 0;
+  border-top: .5em solid transparent;
+  border-bottom: .5em solid transparent;
+  border-left: 0.5em solid #c2cccf;
+}
+/* line 19, ../sass/_arrow_box.scss */
+.container .content .sidebar-left .repos nav.repo .next:hover {
+  color: 0.5em solid #e0e6e7;
+}
+/* line 62, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git {
   height: 100%;
 }
-/* line 39, ../sass/_content.scss */
+/* line 64, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li {
   margin: 0.5em;
   background: #c2cccf;
   padding: 0.25em 0 0.25em;
 }
-/* line 43, ../sass/_content.scss */
+/* line 68, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li a {
   text-decoration: none;
   color: black;
 }
-/* line 47, ../sass/_content.scss */
+/* line 72, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li:hover {
   background: #ced6d9;
 }
-/* line 55, ../sass/_content.scss */
+/* line 80, ../sass/_content.scss */
 .container .content .sidebar-right {
   border-left: 1em solid #f7f3e8;
   left: -25%;
 }
-/* line 61, ../sass/_content.scss */
+/* line 86, ../sass/_content.scss */
 .container .content .slideIn {
   opacity: 1;
   left: 0;
