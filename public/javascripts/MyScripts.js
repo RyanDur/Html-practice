@@ -12,8 +12,6 @@ var compareDates = function(a, b) {
     return (a.updated_at > b.updated_at) ? 1 : ((a.updated_at < b.updated_at) ? -1 : 0); 
 };
 
-compareDates
-
 var slidePanelsIn = function() {
     $('.sidebar-left').addClass('slideIn');
     $('.sidebar-right').addClass('slideIn');
@@ -22,7 +20,7 @@ var slidePanelsIn = function() {
 var stickySection = function(container, section, options) {
     container.waypoint({
         handler: function(direction) {
-                     if (direction == 'down'){
+                     if (direction === 'down'){
                          container.css({'height': section.outerHeight()});
                          section.stop()
                         .addClass('sticky')
@@ -46,11 +44,11 @@ var pages = [];
 var page_num = 0;
 
 var next = function() {
-    forEach(pages[++page_num], appendGit)
+    forEach(pages[++page_num], appendGit);
 };
 
 var prev = function() {
-    forEach(pages[--page_num], appendGit)
+    forEach(pages[--page_num], appendGit);
 };
 
 var pageCount = function() {
@@ -58,17 +56,17 @@ var pageCount = function() {
     $('.page-count').text((page_number) + "/" + pages.length);
 };
 
-var paginate = function(links) {
-    var show_per_page = 4;
-    while(links.length > 0) {
-        var page = [];
-        for(var j = 0; j < show_per_page; j++){
-            if (links[0] != undefined) {
-                page.push(links.shift());
-            }
-        };
-        pages.push(page);
-    };
+var paginate = function(array, show_per_page) {
+    var page = [], pages = [];
+    forEach(array, function(elem) {
+        page.push(elem);
+        if (page.length === show_per_page ||
+            page[page.length - 1] === array[array.length - 1]){
+            pages.push(page);
+            page = [];
+        }
+    });
+    return pages;
 };
 
 var appendGit = function(val) {
@@ -84,8 +82,9 @@ var gitRepos = {
     contentType: "application/json",
     dataType: 'jsonp',
     success: function(json) {
+        var show_per_page = 4;
         json.data.sort(compareDates).reverse();
-        paginate(json.data);
+        pages = paginate(json.data, show_per_page);
         forEach(pages[0], appendGit);
         pageCount();
     }
@@ -96,9 +95,10 @@ $(function() {
     stickySection($(".nav-container"), $("nav.main"), options);
     slidePanelsIn();
     $.ajax(gitRepos);
+
     $('.repos').on('click', '.next', function(event) {
         event.preventDefault();
-        if (page_num != pages.length -1) {
+        if (page_num < pages.length - 1) {
             var git = $(this).closest('.repos').find('.git');
             git.hide('slide', {direction: 'left'}, function() {
                 git.find('li').remove();
@@ -107,10 +107,9 @@ $(function() {
             });
             git.fadeIn();
         }
-    });
-    $('.repos').on('click', '.prev', function() {
+    }).on('click', '.prev', function() {
         event.preventDefault();
-        if (page_num != 0) {
+        if (page_num > 0) {
             var git = $(this).closest('.repos').find('.git');
             git.hide('slide', {direction: 'right'}, function() {
                 git.find('li').remove();
