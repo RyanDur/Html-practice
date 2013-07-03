@@ -1,13 +1,3 @@
-var reveal = function(section) {
-    section.delay(1000).animate({opacity: 1}, 1500);
-};
-
-var forEach = function(array, func) {
-    for(var i = 0; i < array.length; i++ ) {
-        func(array[i]);
-    }
-};
-
 var compareDates = function(a, b) {
     return (a.updated_at > b.updated_at) ? 1 : ((a.updated_at < b.updated_at) ? -1 : 0); 
 };
@@ -23,15 +13,15 @@ var stickySection = function(container, section, options) {
                      if (direction === 'down'){
                          container.css({'height': section.outerHeight()});
                          section.stop()
-                        .addClass('sticky')
-                        .css('top', -section.outerHeight())
-                        .animate({'top': options.top_spacing});
+        .addClass('sticky')
+        .css('top', -section.outerHeight())
+        .animate({'top': options.top_spacing});
                      } else {
                          container.css({'height':'auto'});
                          section.stop()
-                         .removeClass('sticky')
-                         .css("top", section.outerHeight() + options.waypoint_offset)
-                         .animate({'top': ""});
+        .removeClass('sticky')
+        .css("top", section.outerHeight() + options.waypoint_offset)
+        .animate({'top': ""});
                      }
                  },
         offset: function() {
@@ -40,39 +30,12 @@ var stickySection = function(container, section, options) {
     });
 };
 
-var pages = [];
-var page_num = 0;
-
-var next = function() {
-    forEach(pages[++page_num], appendGit);
-};
-
-var prev = function() {
-    forEach(pages[--page_num], appendGit);
-};
-
-var pageCount = function() {
-    var page_number = page_num + 1;
-    $('.page-count').text((page_number) + "/" + pages.length);
-};
-
-var paginate = function(array, show_per_page) {
-    var page = [], pages = [];
-    forEach(array, function(elem) {
-        page.push(elem);
-        if (page.length === show_per_page ||
-            page[page.length - 1] === array[array.length - 1]){
-            pages.push(page);
-            page = [];
-        }
-    });
-    return pages;
-};
-
-var appendGit = function(val) {
+var gitRepo = function(val) {
     $('.git').append("<li><a href="+ val.html_url +
-    " target=_blank>"+ val.name +"</a></li>");
+        " target=_blank>"+ val.name +"</a></li>");
 }
+
+var page = pagination(gitRepo);
 
 var gitRepos = {
     type: 'GET',
@@ -82,11 +45,39 @@ var gitRepos = {
     contentType: "application/json",
     dataType: 'jsonp',
     success: function(json) {
-        var show_per_page = 4;
+        var showPerPage = 4;
         json.data.sort(compareDates).reverse();
-        pages = paginate(json.data, show_per_page);
-        forEach(pages[0], appendGit);
-        pageCount();
+        page.paginate(json.data, showPerPage);
+        page.first();
+        page.count();
+    }
+};
+
+var next = function(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if (page.beforeLast()) {
+        var git = $(this).closest('.repos').find('.git');
+        git.hide('slide', {direction: 'left'}, function() {
+            $(this).find('li').remove();
+            page.next();
+            page.count();
+            $(this).fadeIn();
+        });
+    }
+};
+
+var previous = function(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if (page.afterFirst()) {
+        var git = $(this).closest('.repos').find('.git');
+        git.hide('slide', {direction: 'right'}, function () {
+            $(this).find('li').remove();
+            page.prev();
+            page.count();
+            $(this).fadeIn();
+        });
     }
 };
 
@@ -96,28 +87,7 @@ $(function() {
     slidePanelsIn();
     $.ajax(gitRepos);
 
-    $('.repos').on('click', '.next', function(event) {
-        event.preventDefault();
-        if (page_num < pages.length - 1) {
-            var git = $(this).closest('.repos').find('.git');
-            git.hide('slide', {direction: 'left'}, function() {
-                git.find('li').remove();
-                next();
-                pageCount();
-            });
-            git.fadeIn();
-        }
-    }).on('click', '.prev', function() {
-        event.preventDefault();
-        if (page_num > 0) {
-            var git = $(this).closest('.repos').find('.git');
-            git.hide('slide', {direction: 'right'}, function() {
-                git.find('li').remove();
-                prev();
-                pageCount();
-            });
-            git.fadeIn();
-        }
-    });
+    $('.repos').on('click', '.next', next)
+    .on('click', '.prev', previous);
 });
 

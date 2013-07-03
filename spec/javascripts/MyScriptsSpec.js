@@ -5,3 +5,7 @@ describe('compareDates', function() {
         expect(compareDates({"updated_at": "2013-04-15T02:18:27Z"},{"updated_at": "2013-04-25T05:28:00Z"})).toEqual(-1);
     });
 });
+
+describe('paginate' function() {
+
+});
