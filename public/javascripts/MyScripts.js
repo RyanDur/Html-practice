@@ -13,15 +13,15 @@ var stickySection = function(container, section, options) {
                      if (direction === 'down'){
                          container.css({'height': section.outerHeight()});
                          section.stop()
-        .addClass('sticky')
-        .css('top', -section.outerHeight())
-        .animate({'top': options.top_spacing});
+                        .addClass('sticky')
+                        .css('top', -section.outerHeight())
+                        .animate({'top': options.top_spacing});
                      } else {
                          container.css({'height':'auto'});
                          section.stop()
-        .removeClass('sticky')
-        .css("top", section.outerHeight() + options.waypoint_offset)
-        .animate({'top': ""});
+                        .removeClass('sticky')
+                        .css("top", section.outerHeight() + options.waypoint_offset)
+                        .animate({'top': ""});
                      }
                  },
         offset: function() {
@@ -54,32 +54,41 @@ var gitRepos = {
 };
 
 var next = function(event) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
+    if (activeNext){return;}
+    activeNext = true;
     if (page.beforeLast()) {
-        var git = $(this).closest('.repos').find('.git');
-        git.hide('slide', {direction: 'left'}, function() {
+        $(this).closest('.repos')
+        .find('.git')
+        .hide('slide', {direction: 'left'}, function() {
             $(this).find('li').remove();
             page.next();
             page.count();
             $(this).fadeIn();
+            activeNext = false;
+            activePrev = false;
         });
     }
 };
 
 var previous = function(event) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
+    if (activePrev){return;}
+    activePrev = true;
     if (page.afterFirst()) {
-        var git = $(this).closest('.repos').find('.git');
-        git.hide('slide', {direction: 'right'}, function () {
+        $(this).closest('.repos')
+        .find('.git')
+        .hide('slide', {direction: 'right'}, function () {
             $(this).find('li').remove();
             page.prev();
             page.count();
             $(this).fadeIn();
+            activePrev = false;
+            activeNext = false;
         });
     }
 };
+
+var activeNext = false;
+var activePrev = false;
 
 $(function() {
     var options = {top_spacing: 15, waypoint_offset: 150};
