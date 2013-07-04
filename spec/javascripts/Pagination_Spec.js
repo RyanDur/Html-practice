@@ -1,3 +1,9 @@
+var path = '';
+if (typeof window._karma_ !== 'undefined') {
+  path += 'base/'
+} 
+jasmine.getFixtures().fixturesPath = path + 'spec/javascripts/fixtures';
+
 describe('Pagination', function() {
     var elem;
     beforeEach(function() {
@@ -6,6 +12,8 @@ describe('Pagination', function() {
 
     it('allows us to search using css selectors', function() {
         expect(elem).toHaveClass('git');
+        var data = getJSONFixture('git.json');
+        console.dir(data);
     });
 
     describe('paginate', function() {

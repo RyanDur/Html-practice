@@ -14,9 +14,12 @@ files = [
   'components/jasmine-jquery/lib/jasmine-jquery.js',
   'components/jquery-waypoints/waypoints.min.js',
   'public/javascripts/*.js',
-  'spec/**/*Spec.js'
+  'spec/**/*Spec.js',
 ];
 
+proxies = {
+  '/': 'http://localhost:8100/'
+};
 
 // list of files to exclude
 exclude = [
