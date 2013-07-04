@@ -35,7 +35,7 @@ var gitRepo = function(val) {
         " target=_blank>"+ val.name +"</a></li>");
 }
 
-var page = pagination(gitRepo);
+var page;
 
 var gitRepos = {
     type: 'GET',
@@ -91,6 +91,7 @@ var activeNext = false;
 var activePrev = false;
 
 $(function() {
+    page = Pagination(gitRepo);
     var options = {top_spacing: 15, waypoint_offset: 150};
     stickySection($(".nav-container"), $("nav.main"), options);
     slidePanelsIn();

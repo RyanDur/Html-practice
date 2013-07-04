@@ -1,4 +1,4 @@
-var pagination = function(appendElem) {
+var Pagination = function(appendElem) {
         var pages = [];
         var num = 0;
 

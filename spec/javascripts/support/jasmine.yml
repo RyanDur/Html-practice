@@ -12,6 +12,8 @@
 #
 src_files:
     - public/javascripts/**/*.js
+    - components/jquery/jquery.min.js
+    - components/jasmine-jquery/lib/jasmine-jquery.js
 
 # stylesheets
 #
