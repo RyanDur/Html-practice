@@ -33,7 +33,11 @@ var stickySection = function(container, section, options) {
 var gitRepo = function(val) {
     $('.git').append("<li><a href="+ val.html_url +
         " target=_blank>"+ val.name +"</a></li>");
-}
+};
+
+var pageCount = function(pageNumber, pageTotal) {
+    $('.page-count').text(pageNumber + "/" + pageTotal);
+};
 
 var page;
 
@@ -48,8 +52,8 @@ var gitRepos = {
         var showPerPage = 4;
         json.data.sort(compareDates).reverse();
         page.paginate(json.data, showPerPage);
-        page.first();
-        page.count();
+        page.first($('.git'), $('li'));
+        pageCount(page.number(), page.total());
     }
 };
 
@@ -60,9 +64,8 @@ var next = function(event) {
         $(this).closest('.repos')
         .find('.git')
         .hide('slide', {direction: 'left'}, function() {
-            $(this).find('li').remove();
-            page.next();
-            page.count();
+            page.next($(this), $('li'));
+            pageCount(page.number(), page.total());
             $(this).fadeIn();
             activeNext = false;
             activePrev = false;
@@ -77,9 +80,8 @@ var previous = function(event) {
         $(this).closest('.repos')
         .find('.git')
         .hide('slide', {direction: 'right'}, function () {
-            $(this).find('li').remove();
-            page.prev();
-            page.count();
+            page.prev($('.git'), $('li'));
+            pageCount(page.number(), page.total());
             $(this).fadeIn();
             activePrev = false;
             activeNext = false;

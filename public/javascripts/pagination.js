@@ -3,33 +3,42 @@ var Pagination = function(appendElem) {
         var num = 0;
 
     return {
-        first: function() {
-            forEach(pages[0], appendElem);
+        first: function(ancestor, child) {
+            ancestor.find(child).remove();
+            num = 0;
+            forEach(pages[num], appendElem);
         },
 
         afterFirst: function() {
-            return (num > 0);
+            return num > 0;
         },
 
-        last: function() {
-            forEach(pages[pages.length - 1], appendElem);
+        last: function(ancestor, child) {
+            ancestor.find(child).remove();
+            num = pages.length - 1;
+            forEach(pages[num], appendElem);
         },
 
         beforeLast: function() {
             return num < pages.length - 1;
         },
 
-        next: function() {
+        total: function() {
+            return pages.length;
+        },
+
+        number: function() {
+            return num + 1;
+        },
+
+        next: function(ancestor, child) {
+            ancestor.find(child).remove();
             forEach(pages[++num], appendElem);
         },
 
-        prev: function() {
+        prev: function(ancestor, child) {
+            ancestor.find(child).remove();
             forEach(pages[--num], appendElem);
-        },
-
-        count: function() {
-            var pageNumber = num + 1;
-            $('.page-count').text(pageNumber + "/" + pages.length);
         },
 
         paginate: function(array, showPerPage) {
