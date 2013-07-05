@@ -94,7 +94,7 @@ describe('Pagination', function() {
     });
 
     describe('paginate', function() {
-        it('should split up the array into segments according to the size specified', function() {
+        it('should split up the array into segments that are the size specified', function() {
             page = Pagination(appendElem);
             page.paginate(jsonData, 3);
             expect(page.total()).toEqual(10);
