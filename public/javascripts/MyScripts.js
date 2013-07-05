@@ -52,7 +52,7 @@ var gitRepos = {
         var showPerPage = 4;
         json.data.sort(compareDates).reverse();
         page.paginate(json.data, showPerPage);
-        page.first($('.git'), $('li'));
+        page.first($('.git'), 'li');
         pageCount(page.number(), page.total());
     }
 };
@@ -64,7 +64,7 @@ var next = function(event) {
         $(this).closest('.repos')
         .find('.git')
         .hide('slide', {direction: 'left'}, function() {
-            page.next($(this), $('li'));
+            page.next($(this), 'li');
             pageCount(page.number(), page.total());
             $(this).fadeIn();
             activeNext = false;
@@ -80,7 +80,7 @@ var previous = function(event) {
         $(this).closest('.repos')
         .find('.git')
         .hide('slide', {direction: 'right'}, function () {
-            page.prev($('.git'), $('li'));
+            page.prev($('.git'), 'li');
             pageCount(page.number(), page.total());
             $(this).fadeIn();
             activePrev = false;
