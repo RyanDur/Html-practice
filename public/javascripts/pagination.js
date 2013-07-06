@@ -1,56 +1,59 @@
-var Pagination = function(appendElem) {
-        var pages = [];
-        var num = 0;
+define(['utility'], function(util) {
 
-    return {
-        first: function(ancestor, child) {
-            ancestor.find(child).remove();
-            num = 0;
-            forEach(pages[num], appendElem);
-        },
+    return function(appendElem) {
+            var pages = [];
+            var num = 0;
 
-        afterFirst: function() {
-            return num > 0;
-        },
+        return {
+            first: function(ancestor, child) {
+                ancestor.find(child).remove();
+                num = 0;
+                util.forEach(pages[num], appendElem);
+            },
 
-        last: function(ancestor, child) {
-            ancestor.find(child).remove();
-            num = pages.length - 1;
-            forEach(pages[num], appendElem);
-        },
+            afterFirst: function() {
+                return num > 0;
+            },
 
-        beforeLast: function() {
-            return num < pages.length - 1;
-        },
+            last: function(ancestor, child) {
+                ancestor.find(child).remove();
+                num = pages.length - 1;
+                util.forEach(pages[num], appendElem);
+            },
 
-        total: function() {
-            return pages.length;
-        },
+            beforeLast: function() {
+                return num < pages.length - 1;
+            },
 
-        number: function() {
-            return num + 1;
-        },
+            total: function() {
+                return pages.length;
+            },
 
-        next: function(ancestor, child) {
-            ancestor.find(child).remove();
-            forEach(pages[++num], appendElem);
-        },
+            number: function() {
+                return num + 1;
+            },
 
-        prev: function(ancestor, child) {
-            ancestor.find(child).remove();
-            forEach(pages[--num], appendElem);
-        },
+            next: function(ancestor, child) {
+                ancestor.find(child).remove();
+                util.forEach(pages[++num], appendElem);
+            },
 
-        paginate: function(array, showPerPage) {
-            var page = [];
-            forEach(array, function(elem) {
-                page.push(elem);
-                if (page.length === showPerPage ||
-                page[page.length - 1] === array[array.length - 1]){
-                    pages.push(page);
-                    page = [];
-                }
-            });
+            prev: function(ancestor, child) {
+                ancestor.find(child).remove();
+                util.forEach(pages[--num], appendElem);
+            },
+
+            paginate: function(array, showPerPage) {
+                var page = [];
+                util.forEach(array, function(elem) {
+                    page.push(elem);
+                    if (page.length === showPerPage ||
+                    page[page.length - 1] === array[array.length - 1]){
+                        pages.push(page);
+                        page = [];
+                    }
+                });
+            }
         }
-    }
-};
+    };
+});
