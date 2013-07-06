@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Wed Jul 03 2013 16:37:00 GMT-0700 (PDT)
+// Generated on Sat Jul 06 2013 14:28:41 GMT-0700 (PDT)
 
 
 // base path, that will be used to resolve files and exclude
@@ -10,21 +10,25 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'components/jquery/jquery.min.js',
-  'components/jasmine-jquery/lib/jasmine-jquery.js',
-  'components/jquery-waypoints/waypoints.min.js',
-  'public/javascripts/*.js',
-  'spec/**/*Spec.js',
+  REQUIRE,
+  REQUIRE_ADAPTER,
+  'spec/javascripts/test_main.js',
+  {pattern: 'spec/**/*Spec.js', included: false},
+  {pattern: 'public/**/*.js', included: false},
+  {pattern: 'components/**/*.js', included: false},
+  {pattern: 'components/**/**/*.js', included: false},
+  {pattern: 'components/**/**/**/*.js', included: false}
+];
+
+
+// list of files to exclude
+exclude = [
+  'public/javascripts/main.js'
 ];
 
 proxies = {
   '/': 'http://localhost:8100/'
 };
-
-// list of files to exclude
-exclude = [
-  
-];
 
 
 // test results reporter to use
@@ -61,7 +65,7 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Chrome','Safari','Firefox'];
+browsers = ['Chrome', 'Firefox', 'Safari'];
 
 
 // If browser does not capture in given timeout [ms], kill it
