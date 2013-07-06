@@ -1,14 +1,10 @@
-define(['Pagination', 'jqueryui'], function(Pagination) {
+define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
 
   return function(repo) {
         var activeNext = false, activePrev = false, page = Pagination(repo);
 
         var pageCount = function(pageNumber, pageTotal) {
             $('.page-count').text(pageNumber + "/" + pageTotal);
-        };
-
-        var compareUpdatedAt = function(a,b){
-            return (a.updated_at > b.updated_at) ? 1 : ((a.updated_at < b.updated_at) ? -1 : 0); 
         };
 
         return {
@@ -22,7 +18,7 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
                 dataType: 'jsonp',
                 success: function(json) {
                     var showPerPage = 4;
-                    json.data.sort(compareUpdatedAt).reverse();
+                    json.data.sort(util.compareUpdatedAt).reverse();
                     page.paginate(json.data, showPerPage);
                     page.first($('.git'), 'li');
                     pageCount(page.number(), page.total());
