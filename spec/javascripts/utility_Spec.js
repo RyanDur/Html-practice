@@ -15,7 +15,7 @@ define(['utility'], function(util) {
       });
     })
 
-    describe('compareDates', function() {
+    describe('compareUpdatedAt', function() {
       it('should return 0 1 or -1', function() {
         expect(util.compareUpdatedAt({"updated_at": "2013-06-12T02:30:31Z"},{"updated_at": "2013-06-12T02:30:31Z"})).toEqual(0);
         expect(util.compareUpdatedAt({"updated_at": "2013-01-11T21:24:10Z"},{"updated_at": "2013-01-11T13:56:38Z"})).toEqual(1);

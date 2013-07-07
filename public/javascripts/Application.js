@@ -1,4 +1,5 @@
-define(['RepoPages', 'waypoints'], function(RepoPages, waypoints) {
+define(['RepoPages', 'waypoints', 'utility'], function(RepoPages, waypoints, util) {
+
   var slidePanelsIn = function() {
     $('.sidebar-left').addClass('slideIn');
     $('.sidebar-right').addClass('slideIn');
@@ -10,15 +11,15 @@ define(['RepoPages', 'waypoints'], function(RepoPages, waypoints) {
                  if (direction === 'down'){
                    container.css({'height': section.outerHeight()});
                    section.stop()
-                  .addClass('sticky')
-                  .css('top', -section.outerHeight())
-                  .animate({'top': options.top_spacing});
+      .addClass('sticky')
+      .css('top', -section.outerHeight())
+      .animate({'top': options.top_spacing});
                  } else {
                    container.css({'height':'auto'});
                    section.stop()
-                  .removeClass('sticky')
-                  .css("top", section.outerHeight() + options.waypoint_offset)
-                  .animate({'top': ""});
+      .removeClass('sticky')
+      .css("top", section.outerHeight() + options.waypoint_offset)
+      .animate({'top': ""});
                  }
                },
       offset: function() {
@@ -32,12 +33,25 @@ define(['RepoPages', 'waypoints'], function(RepoPages, waypoints) {
       " target=_blank>"+ val.name +"</a></li>");
   };
 
+  var gitRepos = {
+    type: 'GET',
+    url: 'https://api.github.com/users/RyanDur/repos',
+    cache: false,
+    async: false,
+    contentType: "application/json",
+    dataType: 'jsonp',
+    success: function(json) {
+      var showPerPage = 4, repo = RepoPages(gitRepo);
+      json.data.sort(util.compareUpdatedAt).reverse();
+      repo.init(json.data, showPerPage);
+    }
+  };
+
   $(function() {
-    var repo = RepoPages(gitRepo);
     var options = {top_spacing: 15, waypoint_offset: 150};
     stickySection($(".nav-container"), $("nav.main"), options);
     slidePanelsIn();
-    $.ajax(repo.gitRepos);
+    $.ajax(gitRepos);
 
     $('.repos').on('click', '.next', repo.next)
     .on('click', '.prev', repo.previous);
