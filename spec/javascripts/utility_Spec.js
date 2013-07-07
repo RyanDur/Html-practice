@@ -1,5 +1,18 @@
 define(['utility'], function(util) {
-  
+
+  describe('forEach', function() {
+    it('should perform a function on an array', function() {
+      var oldArray = [1,2,3,4,5,6];
+      var newArray = [];
+
+      util.forEach(oldArray, function(val) {
+        newArray.push(val);
+      });
+
+      expect(newArray).toEqual(oldArray);
+    });
+  })
+
   describe('compareDates', function() {
     it('should return 0 1 or -1', function() {
       expect(util.compareUpdatedAt({"updated_at": "2013-06-12T02:30:31Z"},{"updated_at": "2013-06-12T02:30:31Z"})).toEqual(0);

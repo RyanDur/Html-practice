@@ -26,6 +26,7 @@ exclude = [
   'public/javascripts/main.js'
 ];
 
+
 proxies = {
   '/': 'http://localhost:8100/'
 };

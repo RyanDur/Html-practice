@@ -3,6 +3,8 @@ var tests = Object.keys(window.__karma__.files).filter(function (file) {
 });
 
 requirejs.config({
+    urlArgs: "bust=" + (new Date()).getTime(), // not to be used in production
+
     // Karma serves files from '/base'
     baseUrl: '/base/public/javascripts',
 
