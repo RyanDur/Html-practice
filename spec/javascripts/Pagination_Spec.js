@@ -1,4 +1,5 @@
 define(['Pagination', 'jasminejquery'], function(Pagination) {
+
     describe('Pagination', function() {
         var elem, jsonData, page;
 
