@@ -16,7 +16,7 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
             },
 
       next: function(event) {
-              if (activeNext){return;}
+              if (activeNext){return};
               activeNext = true;
               if (page.beforeLast()) {
                 $(this).closest('.repos')
@@ -32,7 +32,7 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
             },
 
       previous: function(event) {
-                  if (activePrev){return;}
+                  if (activePrev){return};
                   activePrev = true;
                   if (page.afterFirst()) {
                     $(this).closest('.repos')
