@@ -1,5 +1,4 @@
 define(['RepoPages', 'waypoints', 'utility'], function(RepoPages, waypoints, util) {
-
   var slidePanelsIn = function() {
     $('.sidebar-left').addClass('slideIn');
     $('.sidebar-right').addClass('slideIn');
@@ -33,6 +32,9 @@ define(['RepoPages', 'waypoints', 'utility'], function(RepoPages, waypoints, uti
       " target=_blank>"+ val.name +"</a></li>");
   };
 
+  var repo;
+  var showPerPage = 4;
+
   var gitRepos = {
     type: 'GET',
     url: 'https://api.github.com/users/RyanDur/repos',
@@ -41,13 +43,13 @@ define(['RepoPages', 'waypoints', 'utility'], function(RepoPages, waypoints, uti
     contentType: "application/json",
     dataType: 'jsonp',
     success: function(json) {
-      var showPerPage = 4, repo = RepoPages(gitRepo);
       json.data.sort(util.compareUpdatedAt).reverse();
       repo.init(json.data, showPerPage);
     }
   };
 
   $(function() {
+    repo = RepoPages(gitRepo);
     var options = {top_spacing: 15, waypoint_offset: 150};
     stickySection($(".nav-container"), $("nav.main"), options);
     slidePanelsIn();
