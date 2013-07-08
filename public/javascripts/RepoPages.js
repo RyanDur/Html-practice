@@ -18,32 +18,30 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
       next: function(event) {
               if (activeNext){return};
               activeNext = true;
+
               if (page.beforeLast()) {
-                $(this).closest('.repos')
-                .find('.git')
+                $(this).closest('.repos').find('.git')
                 .hide('slide', {direction: 'left'}, function() {
                   page.next($(this), 'li');
                   pageCount(page.number(), page.total());
-                  $(this).fadeIn();
                   activeNext = false;
                   activePrev = false;
-                });
+                }).fadeIn();
               }
             },
 
       previous: function(event) {
                   if (activePrev){return};
                   activePrev = true;
+
                   if (page.afterFirst()) {
-                    $(this).closest('.repos')
-                    .find('.git')
+                    $(this).closest('.repos').find('.git')
                     .hide('slide', {direction: 'right'}, function () {
                       page.prev($('.git'), 'li');
                       pageCount(page.number(), page.total());
-                      $(this).fadeIn();
                       activePrev = false;
                       activeNext = false;
-                    });
+                    }).fadeIn();
                   }
                 }
     };
