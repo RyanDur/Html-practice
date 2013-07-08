@@ -1,59 +1,63 @@
 define(['utility'], function(util) {
 
     return function(appendElem) {
-            var pages = [];
-            var num = 0;
+      var pages = [];
+      var num = 0;
+      
+      return {
+        first: function(ancestor, child) {
+                 ancestor.find(child).remove();
+                 num = 0;
+                 util.forEach(pages[num], appendElem);
+               },
 
-        return {
-            first: function(ancestor, child) {
-                ancestor.find(child).remove();
-                num = 0;
-                util.forEach(pages[num], appendElem);
-            },
+         afterFirst: function() {
+                 return num > 0;
+               },
 
-            afterFirst: function() {
-                return num > 0;
-            },
+         last: function(ancestor, child) {
+                 ancestor.find(child).remove();
+                 num = pages.length - 1;
+                 util.forEach(pages[num], appendElem);
+               },
 
-            last: function(ancestor, child) {
-                ancestor.find(child).remove();
-                num = pages.length - 1;
-                util.forEach(pages[num], appendElem);
-            },
+         beforeLast: function() {
+                 return num < pages.length - 1;
+               },
 
-            beforeLast: function() {
-                return num < pages.length - 1;
-            },
+         total: function() {
+                 return pages.length;
+               },
 
-            total: function() {
-                return pages.length;
-            },
+         number: function() {
+                 return num + 1;
+               },
 
-            number: function() {
-                return num + 1;
-            },
+         next: function(ancestor, child) {
+                 if (num < pages.length - 1) {
+                   ancestor.find(child).remove();
+                   util.forEach(pages[++num], appendElem);
+                 }
+               },
 
-            next: function(ancestor, child) {
-                ancestor.find(child).remove();
-                util.forEach(pages[++num], appendElem);
-            },
+         prev: function(ancestor, child) {
+                 if(num > 0) {
+                   ancestor.find(child).remove();
+                   util.forEach(pages[--num], appendElem);
+                 }
+               },
 
-            prev: function(ancestor, child) {
-                ancestor.find(child).remove();
-                util.forEach(pages[--num], appendElem);
-            },
-
-            paginate: function(array, showPerPage) {
-                var page = [];
-                util.forEach(array, function(elem) {
-                    page.push(elem);
-                    if (page.length === showPerPage ||
-                    page[page.length - 1] === array[array.length - 1]){
-                        pages.push(page);
-                        page = [];
-                    }
-                });
-            }
+         paginate: function(array, showPerPage) {
+                 var page = [];
+                 util.forEach(array, function(elem) {
+                   page.push(elem);
+                   if (page.length === showPerPage ||
+                   page[page.length - 1] === array[array.length - 1]){
+                     pages.push(page);
+                     page = [];
+                   }
+                 });
+               }
         }
     };
 });

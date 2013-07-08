@@ -84,6 +84,12 @@ define(['Pagination', 'jasminejquery'], function(Pagination) {
                     page.next($('.git'), 'li');
                 });
             });
+
+            it('should not go past the last page', function() {
+                page.last($('.git'), 'li');
+                page.next($('.git'), 'li');
+                expect(page.number()).toEqual(page.total());
+            });
         });
 
         describe('prev', function() {
@@ -100,6 +106,12 @@ define(['Pagination', 'jasminejquery'], function(Pagination) {
                     checkText(val * showPerPage);
                     page.prev($('.git'), 'li');
                 });
+            });
+
+            it('should not go past the first page', function() {
+                page.first($('.git'), 'li');
+                page.prev($('.git'), 'li');
+                expect(page.number()).toEqual(1);
             });
         });
 
@@ -159,7 +171,7 @@ define(['Pagination', 'jasminejquery'], function(Pagination) {
 
             it('should make the last segment less than the others if the number given does not divide evenly', function() {
                 page = Pagination(appendElem);
-                testAllButLast(8, 4);
+                testAllButLast(numOfPages, showPerPage);
                 expect($('ul.git > li')).toHaveLength(2);
             })
         });
