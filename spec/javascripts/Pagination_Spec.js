@@ -1,37 +1,68 @@
 define(['Pagination', 'jasminejquery'], function(Pagination) {
 
     describe('Pagination', function() {
-        var elem, jsonData, page;
+        var elem, jsonData, page, showPerPage = 4, numOfPages;
 
         var appendElem = function(val) {
             $('.git').append("<li><a href="+ val.html_url +">"+ val.name +"</a></li>");
         };
 
+        var checkText = function(val) {
+            $('ul.git > li').each(function(index) {
+                var elem = $(this).find('a');
+                expect(elem).toContainText(jsonData[index + val].name);
+                expect(elem.attr('href')).toEqual(jsonData[index + val].html_url);
+            });
+        };
+
+        var fromFirst = function(pageNum, func) {
+            page.first($('.git'), 'li');
+            for (var i = 0; i < pageNum; i++) {
+                func(i);
+            };
+        };
+
+        var fromLast = function(pageNum, func) {
+            page.last($('.git'), 'li');
+            for (var i = numOfPages - 1; i >= pageNum -1; i--) {
+                func(i);
+            }
+        };
+
         beforeEach(function() {
+            this.addMatchers({
+                toHaveLengthLessThanOrEqualTo: function(expected) {
+                    return (this.actual.length < expected || this.actual.length === expected);
+                }
+            });
+
             elem = $('<ul class="git"></ul>');
             setFixtures(elem);
             jsonData = getJSONFixture("git.json");
             page = Pagination(appendElem);
-            page.paginate(jsonData, 4);
+            page.paginate(jsonData, showPerPage);
+            numOfPages = Math.ceil(jsonData.length/showPerPage);
         });
 
         describe('first', function() {
             it('should have four list elements on its first page', function() {
                 page.first($('.git'), 'li');
-                expect($('ul.git > li')).toHaveLength(4);
+                checkText(0);
+                expect($('ul.git > li')).toHaveLength(showPerPage);
             });
         });
 
         describe('last', function() {
             it('should have a list of two element on the last page', function() {
                 page.last($('.git'), 'li');
-                expect($('ul.git > li')).toHaveLength(2);
+                checkText(showPerPage * (numOfPages - 1));
+                expect($('ul.git > li')).toHaveLengthLessThanOrEqualTo(showPerPage);
             });
         });
 
         describe('total', function() {
             it('should return the total number of pages', function() {
-                expect(page.total()).toEqual(8);
+                expect(page.total()).toEqual(numOfPages);
             });
         });
 
@@ -41,31 +72,34 @@ define(['Pagination', 'jasminejquery'], function(Pagination) {
                 expect(page.number()).toEqual(1);
 
                 page.last($('.git'), 'li');
-                expect(page.number()).toEqual(8);
+                expect(page.number()).toEqual(numOfPages);
             });
         });
 
         describe('next', function() {
             it('should move from the current page to the next', function() {
-                page.first($('.git'), 'li');
-                expect(page.number()).toEqual(1);
-                expect($('ul.git > li')).toHaveLength(4);
-
-                page.next($('.git'), 'li');
-                expect(page.number()).toEqual(2);
-                expect($('ul.git > li')).toHaveLength(4);
+                fromFirst(2, function(val) {
+                    expect($('ul.git > li')).toHaveLength(showPerPage);
+                    checkText(val * showPerPage);
+                    page.next($('.git'), 'li');
+                });
             });
         });
 
         describe('prev', function() {
             it('should move from the current page to the previous one', function() {
                 page.last($('.git'), 'li');
-                expect(page.number()).toEqual(8);
-                expect($('ul.git > li')).toHaveLength(2);
+                expect(page.number()).toEqual(numOfPages);
+                expect($('ul.git > li')).toHaveLengthLessThanOrEqualTo(showPerPage);
 
                 page.prev($('.git'), 'li');
-                expect(page.number()).toEqual(7);
-                expect($('ul.git > li')).toHaveLength(4);
+                expect(page.number()).toEqual(numOfPages - 1);
+                expect($('ul.git > li')).toHaveLength(showPerPage);
+
+                fromLast(numOfPages - 1, function(val) {
+                    checkText(val * showPerPage);
+                    page.prev($('.git'), 'li');
+                });
             });
         });
 
@@ -96,38 +130,37 @@ define(['Pagination', 'jasminejquery'], function(Pagination) {
         });
 
         describe('paginate', function() {
+            var testAllButLast = function(numOfPages, showPerPage) {
+                page.paginate(jsonData, showPerPage);
+                expect(page.total()).toEqual(numOfPages);
+                fromFirst(numOfPages - 1, function() {
+                    expect($('ul.git > li')).toHaveLength(showPerPage);
+                    page.next($('.git'), 'li');
+                });
+            };
+
             it('should split up the array into segments that are the size specified', function() {
                 page = Pagination(appendElem);
-                page.paginate(jsonData, 3);
-                expect(page.total()).toEqual(10);
-                page.first($('.git'), 'li');
-                expect($('ul.git > li')).toHaveLength(3);
-                page.last($('.git'), 'li');
+                testAllButLast(10, 3);
                 expect($('ul.git > li')).toHaveLength(3);
 
                 page = Pagination(appendElem);
-                page.paginate(jsonData, 5);
-                expect(page.total()).toEqual(6);
-                page.first($('.git'), 'li');
-                expect($('ul.git > li')).toHaveLength(5);
-                page.last($('.git'), 'li');
+                testAllButLast(6, 5);
                 expect($('ul.git > li')).toHaveLength(5);
 
                 page = Pagination(appendElem);
-                page.paginate(jsonData, 1);
-                expect(page.total()).toEqual(30);
-                page.first($('.git'), 'li');
-                expect($('ul.git > li')).toHaveLength(1);
-                page.last($('.git'), 'li');
+                testAllButLast(30, 1);
                 expect($('ul.git > li')).toHaveLength(1);
 
                 page = Pagination(appendElem);
-                page.paginate(jsonData, 30);
-                expect(page.total()).toEqual(1);
-                page.first($('.git'), 'li');
+                testAllButLast(1, 30);
                 expect($('ul.git > li')).toHaveLength(30);
-                page.last($('.git'), 'li');
-                expect($('ul.git > li')).toHaveLength(30);
+            });
+
+            it('should make the last segment less than the others if the number given does not divide evenly', function() {
+                page = Pagination(appendElem);
+                testAllButLast(8, 4);
+                expect($('ul.git > li')).toHaveLength(2);
             })
         });
     });
