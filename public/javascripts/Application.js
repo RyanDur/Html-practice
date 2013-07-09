@@ -56,6 +56,8 @@ define(['RepoPages', 'waypoints', 'utility'], function(RepoPages, waypoints, uti
     $.ajax(gitRepos);
 
     $('.repos').on('click', '.next', repo.next)
-    .on('click', '.prev', repo.previous);
+    .on('click', '.prev', repo.previous)
+    .on('click', '.first', repo.first)
+    .on('click', '.last', repo.last);
   });
 });

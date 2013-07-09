@@ -40,8 +40,11 @@
           nav.repo {
             @extend %clearfix;
 
+            button.first {
+            }
+
             button.prev {
-              display: inline-block;
+              margin-left: .7em;
               @include arrow_box(right);
               @include border-radius(0 10px 10px 0);
             }
@@ -54,17 +57,23 @@
               padding: 0.2em 1em 0.2em 1em;
               position: relative;
               bottom: .3em;
-              margin: 0 1em 0 1em;
+              margin: 0 .5em 0 .5em;
               @include border-radius(15em);
             }
           
             button.next {
-              display: inline-block;
+              margin-right: .7em;
               @include arrow_box(left);
               @include border-radius(10px 0 0 10px);
             }
 
+            button.last {
+            }
+
             button {
+              display: inline-block;
+              background: $ribbonColor;
+              color: black;
               &:hover{
                 color: 0.5em solid scale-lightness($ribbonColor,50);
               }

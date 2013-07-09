@@ -18,7 +18,9 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
       $(function() {
         repo.init(jsonData, showPerPage);
         $('.repos').on('click', '.next', repo.next)
-        .on('click', '.prev', repo.previous);
+        .on('click', '.prev', repo.previous)
+        .on('click', '.first', repo.first)
+        .on('click', '.last', repo.last);
       });
     });
 
@@ -81,7 +83,6 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
       
       it('should make the previous button hidden on first page', function() {
         for(var i = 1; i < numOfPages - 1; i++) {
-          console.log('Hello');
           $('.prev').click();
         }
         expect($('.page-count')).toContainText(2 + "/" + numOfPages);
@@ -92,5 +93,22 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
         expect($('.prev')).toHaveCss({visibility: 'hidden'});
       });
     });
+
+    describe('first', function() {
+      it('should move directly to the first page', function() {
+        $('.next').click();
+        expect($('.page-count')).toContainText(2 + "/" + numOfPages);
+
+        $('.first').click();
+        expect($('.page-count')).toContainText(1 + "/" + numOfPages);
+      });
+    });
+
+    describe('last', function() {
+      it('should move directly to the last page', function() {
+        $('.last').click();
+        expect($('.page-count')).toContainText(numOfPages + "/" + numOfPages);
+      });
+    })
   });
 });
