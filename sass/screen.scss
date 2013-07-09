@@ -11,24 +11,30 @@ $ribbonColor: rgba(194, 204, 207, 1);
 html{
 }
 .container {
-    background: $background_color;
-    position: relative;
-    @include header;
-    @include navRibbon;
-    @include content;
+  background: $background_color;
+  position: relative;
+  @include header;
+  @include navRibbon;
+  @include content;
 }
 
 .sticky {
-    position: fixed !important;
+  position: fixed !important;
 }
 
 .slideIn {
-    opacity: 1;
-    left: 0;
+  opacity: 1;
+  left: 0;
 }
 
 *, *:after, *:before {
-    @include box-sizing(border-box);
+  @include box-sizing(border-box);
 }
 
-
+%clearfix{
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

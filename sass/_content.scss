@@ -1,95 +1,107 @@
 @mixin content {
 
-    .content {
-        font-family: Alegreya;
-        width: 100%;
-        padding: 0 1em;
+  .content {
+    font-family: Alegreya;
+    width: 100%;
+    padding: 0 1em;
 
-        .main {
-            position: relative;
-            z-index: 41;
-            background: rgba(255, 255, 255, 1);
-            padding: 1em;
-            float: left;
-            width: 50%;
-        }
-
-        %sidebar {
-            @include transition(all 2s 1s);
-            position: relative;
-            color: $background_color;
-            background: rgba(145, 140, 140, 1);
-            opacity: 0;
-            float: left;
-            width: 25%;
-            height: auto;
-            padding: 1em;
-        }
-
-        .sidebar-left {
-            @extend %sidebar;
-            border-right: 1em solid $background_color;
-            left: 25%;
-            .repos {
-                text-align: center;
-                height: 11em;
-                margin: 0 auto;
-                nav.repo {
-                    margin: 0 auto;
-                    padding: 0.75em 0 0 0;
-                    ul {
-                        li {
-                            display: inline-block;
-                            position: relative;
-                        }
-                        .prev {
-                            @include arrow_box(right);
-                            @include border-radius(0 10px 10px 0);
-                        }
-                        .page-count {
-                            background: $ribbonColor;
-                            color: black;
-                            font-size: 0.75em;
-                            padding: 0.2em 1em 0.2em 1em;
-                            position: relative;
-                            bottom: .3em;
-                            margin: 0 1em 0 1em;
-                            @include border-radius(15em);
-                        }
-                        .next {
-                            @include arrow_box(left);
-                            @include border-radius(10px 0 0 10px);
-                        }
-                    }
-                }
-                .git {
-                    height: 100%;
-                    li {
-                        margin: 0.5em;
-                        background: $ribbonColor;
-                        padding: 0.25em 0 0.25em;
-                        a {
-                            text-decoration: none;
-                            color: black;
-                        }
-                        &:hover {
-                            @include background(scale-lightness($ribbonColor, 20));
-                        }
-                    }
-                }
-            }
-        }
-
-        .sidebar-right {
-            @extend %sidebar;
-            border-left: 1em solid $background_color;
-            left: -25%;
-        }
-
-        .slideIn {
-            opacity: 1;
-            left: 0;
-        }
-
+    .main {
+      position: relative;
+      z-index: 41;
+      background: rgba(255, 255, 255, 1);
+      padding: 1em;
+      float: left;
+      width: 50%;
     }
+
+    %sidebar {
+      @include transition(all 2s 1s);
+      position: relative;
+      color: $background_color;
+      background: rgba(145, 140, 140, 1);
+      opacity: 0;
+      float: left;
+      width: 25%;
+      height: auto;
+      padding: 1em;
+    }
+
+    .sidebar-left {
+      @extend %sidebar;
+      border-right: 1em solid $background_color;
+      left: 25%;
+      .repos {
+        position: relative;
+        text-align: center;
+        height: 11em;
+
+        div.repo-container {
+
+          nav.repo {
+            @extend %clearfix;
+
+            button.prev {
+              display: inline-block;
+              @include arrow_box(right);
+              @include border-radius(0 10px 10px 0);
+            }
+
+            div.page-count {
+              display: inline-block;
+              background: $ribbonColor;
+              color: black;
+              font-size: 0.75em;
+              padding: 0.2em 1em 0.2em 1em;
+              position: relative;
+              bottom: .3em;
+              margin: 0 1em 0 1em;
+              @include border-radius(15em);
+            }
+          
+            button.next {
+              display: inline-block;
+              @include arrow_box(left);
+              @include border-radius(10px 0 0 10px);
+            }
+
+            button {
+              &:hover{
+                color: 0.5em solid scale-lightness($ribbonColor,50);
+              }
+            }
+          }
+        }
+      
+        .git {
+          height: 100%;
+        
+          li {
+            margin: 0.5em;
+            background: $ribbonColor;
+            padding: 0.25em 0 0.25em;
+          
+            a {
+              text-decoration: none;
+              color: black;
+            }
+          
+            &:hover {
+              @include background(scale-lightness($ribbonColor, 20));
+            }
+          }
+        }
+      }
+    }
+  
+    .sidebar-right {
+      @extend %sidebar;
+      border-left: 1em solid $background_color;
+      left: -25%;
+    }
+
+    .slideIn {
+      opacity: 1;
+      left: 0;
+    }
+  }
 }

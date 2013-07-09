@@ -6,6 +6,8 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
     var pageCount = function(pageNumber, pageTotal) {
       $('.page-count').text(pageNumber + "/" + pageTotal);
     };
+    
+    $('.prev').css('visibility', 'hidden');
 
     return {
 
@@ -16,31 +18,35 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
             },
 
       next: function(event) {
-              if (activeNext){return};
-              activeNext = true;
+              $('.next').attr('disabled', 'disabled');
+              if (page.number() === page.total()-1) {
+                $('.next').css('visibility', 'hidden');
+              }
 
               if (page.beforeLast()) {
+                $('.prev').css('visibility', 'visible');
                 $(this).closest('.repos').find('.git')
                 .hide('slide', {direction: 'left'}, function() {
                   page.next($(this), 'li');
                   pageCount(page.number(), page.total());
-                  activeNext = false;
-                  activePrev = false;
+                  $('.next').removeAttr('disabled');
                 }).fadeIn();
-              }
+              } 
             },
 
       previous: function(event) {
-                  if (activePrev){return};
-                  activePrev = true;
+                  $('.prev').attr('disabled', 'disabled');
+                  if (page.number() === (page.total() - (page.total() - 2))) {
+                    $('.prev').css('visibility', 'hidden');
+                  }
 
                   if (page.afterFirst()) {
+                    $('.next').css('visibility', 'visible');
                     $(this).closest('.repos').find('.git')
                     .hide('slide', {direction: 'right'}, function () {
                       page.prev($('.git'), 'li');
                       pageCount(page.number(), page.total());
-                      activePrev = false;
-                      activeNext = false;
+                      $('.prev').removeAttr('disabled');
                     }).fadeIn();
                   }
                 }
