@@ -1,4 +1,4 @@
-define(['Pagination', 'jqueryui'], function(Pagination) {
+define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
 
   return function(repo) {
     var page = Pagination(repo);
@@ -6,23 +6,35 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
     var pageCount = function(pageNumber, pageTotal) {
       $('.page-count').text(pageNumber + "/" + pageTotal);
     };
+    
+    var disableMenu = function(buttons) {
+      util.forEach(buttons, function(button) {
+        if (button.attr('disabled') !== 'disabled') {
+          button.attr('disabled', 'disabled');
+        }
+      });
+    };
+    
+    var enableMenu = function(buttons) {
+      util.forEach(buttons, function(button) {
+        if (button.attr('disabled') === 'disabled') {
+          button.removeAttr('disabled');
+        }
+      });
+    };
 
     return {
 
       init: function(data, showPerPage) {
-              $('.first').attr('disabled', 'disabled');
-              $('.prev').attr('disabled', 'disabled');
+              disableMenu([$('.first'), $('.prev')]);
               page.paginate(data, showPerPage);
               page.first($('.git'), 'li');
               pageCount(page.number(), page.total());
             },
 
       first: function(event) {
-              $('.first').attr('disabled', 'disabled');
-              $('.prev').attr('disabled', 'disabled');
-              
-              $('.next').removeAttr('disabled');
-              $('.last').removeAttr('disabled');
+              disableMenu([$('.first'), $('.prev')]);
+              enableMenu([$('.last'), $('.next')]);
 
               $(this).closest('.repos').find('.git')
               .hide('slide', {direction: 'right'}, function () {
@@ -32,11 +44,8 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
              },
 
       last: function(event) {
-              $('.last').attr('disabled', 'disabled');
-              $('.next').attr('disabled', 'disabled');
-              
-              $('.prev').removeAttr('disabled');
-              $('.first').removeAttr('disabled');
+              disableMenu([$('.last'), $('.next')]);
+              enableMenu([$('.first'), $('.prev')]);
               
               $(this).closest('.repos').find('.git')
               .hide('slide', {direction: 'left'}, function() {
@@ -46,10 +55,8 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
             },
 
       next: function(event) {
-              $('.next').attr('disabled', 'disabled');
-              
-              $('.first').removeAttr('disabled');
-              $('.prev').removeAttr('disabled');
+              disableMenu([$('.next')]);
+              enableMenu([$('.first'), $('.prev')]);
 
               $(this).closest('.repos').find('.git')
               .hide('slide', {direction: 'left'}, function() {
@@ -58,18 +65,16 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
                 pageCount(page.number(), page.total());
                 
                 if (page.isLast()) {
-                  $('.last').attr('disabled', 'disabled');
+                  disableMenu([$('.last')]);
                 } else {
-                  $('.next').removeAttr('disabled');
+                  enableMenu([$('.next')]);
                 }
               }).fadeIn();
             },
 
       previous: function(event) {
-                  $('.prev').attr('disabled', 'disabled');
-                  
-                  $('.next').removeAttr('disabled');
-                  $('.last').removeAttr('disabled');
+                  disableMenu([$('.prev')]);
+                  enableMenu([$('.last'), $('.next')]);
 
                   $(this).closest('.repos').find('.git')
                   .hide('slide', {direction: 'right'}, function () {
@@ -78,12 +83,11 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
                     pageCount(page.number(), page.total());
                     
                     if (page.isFirst()) {
-                      $('.first').attr('disabled', 'disabled');
+                      disableMenu([$('.first')]);
                     } else {
-                      $('.prev').removeAttr('disabled');
+                      enableMenu([$('.prev')]);
                     }
                   }).fadeIn();
-
                 }
     };
   };
