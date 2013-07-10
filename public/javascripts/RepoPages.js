@@ -1,7 +1,11 @@
 define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
+  var first = '.first', prev = '.prev', last = '.last', next = '.next';
+  var firstDirection = 'right', prevDirection = 'right';
+  var nextDirection = 'left', lastDirection = 'left';
+  var ancestor = '.repos', parent = '.git', child = 'li';
 
-  return function(repo) {
-    var page = Pagination(repo);
+  return function(repoElem) {
+    var page = Pagination(repoElem);
 
     var pageCount = function(pageNumber, pageTotal) {
       $('.page-count').text(pageNumber + "/" + pageTotal);
@@ -24,69 +28,64 @@ define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
     };
 
     var changePage = function(button, direction, func) {
-      button.closest('.repos').find('.git')
+      button.closest(ancestor).find(parent)
       .hide('slide', {direction: direction}, function () {
         func();
+        pageCount(page.number(), page.total());
       }).fadeIn();
     };
 
     return {
 
       init: function(data, showPerPage) {
-              disableMenu([$('.first'), $('.prev')]);
+              disableMenu([$(first), $(prev)]);
               page.paginate(data, showPerPage);
-              page.first($('.git'), 'li');
+              page.first($(parent), child);
               pageCount(page.number(), page.total());
             },
 
       first: function(event) {
-              disableMenu([$('.first'), $('.prev')]);
-              enableMenu([$('.last'), $('.next')]);
+              disableMenu([$(first), $(prev)]);
+              enableMenu([$(last), $(next)]);
 
-              changePage($(this), 'right', function () {
-                page.first($('.git'), 'li');
-                pageCount(page.number(), page.total());
+              changePage($(this), firstDirection, function () {
+                page.first($(parent), child);
               });
              },
 
       last: function(event) {
-              disableMenu([$('.last'), $('.next')]);
-              enableMenu([$('.first'), $('.prev')]);
+              disableMenu([$(last), $(next)]);
+              enableMenu([$(first), $(prev)]);
 
-              changePage($(this), 'left', function() {
-                page.last($('.git'), 'li');
-                pageCount(page.number(), page.total());
+              changePage($(this), lastDirection, function() {
+                page.last($(parent), child);
               });
             },
 
       next: function(event) {
-              disableMenu([$('.next')]);
-              enableMenu([$('.first'), $('.prev')]);
+              disableMenu([$(next)]);
+              enableMenu([$(first), $(prev)]);
 
-              changePage($(this), 'left', function() {
-                page.next($('.git'), 'li');
-                pageCount(page.number(), page.total());
-
+              changePage($(this), nextDirection, function() {
+                page.next($(parent), child);
                 if (page.isLast()) {
-                  disableMenu([$('.last')]);
+                  disableMenu([$(last)]);
                 } else {
-                  enableMenu([$('.next')]);
+                  enableMenu([$(next)]);
                 }
               });
             },
 
       previous: function(event) {
-                  disableMenu([$('.prev')]);
-                  enableMenu([$('.last'), $('.next')]);
+                  disableMenu([$(prev)]);
+                  enableMenu([$(last), $(next)]);
 
-                  changePage($(this), 'right', function () {
-                    page.prev($('.git'), 'li');
-                    pageCount(page.number(), page.total());
-
+                  changePage($(this), prevDirection, function () {
+                    page.prev($(parent), child);
                     if (page.isFirst()) {
-                      disableMenu([$('.first')]);
+                      disableMenu([$(first)]);
                     } else {
-                      enableMenu([$('.prev')]);
+                      enableMenu([$(prev)]);
                     }
                   });
                 }
