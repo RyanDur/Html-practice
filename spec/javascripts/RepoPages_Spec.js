@@ -9,6 +9,12 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
     };
 
     beforeEach(function() {
+      this.addMatchers({
+        toHaveLengthLessThanOrEqualTo: function(expected) {
+          return (this.actual.length < expected || this.actual.length === expected);
+        }
+      });
+
       repo = RepoPages(gitRepo);
       jsonData = getJSONFixture('git.json');
       loadFixtures('repos.html');
@@ -24,7 +30,7 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
       });
     });
 
-   describe('init', function() {
+    describe('init', function() {
       it('should load the first of the specified number of repos into the page and display the page count', function() {
         expect($('.page-count')).toContainText(1 + "/" + numOfPages);
         expect($('ul.git > li')).toHaveLength(showPerPage);
@@ -50,7 +56,7 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
         $('.next').click();
         expect($('.first')).not.toBeDisabled();
       });
-      
+
       it('should enable the prev buton', function() {
         $('.next').click();
         expect($('.prev')).not.toBeDisabled();
@@ -62,6 +68,13 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
         }
         expect($('.page-count')).toContainText(numOfPages + "/" + numOfPages);
         expect($('.next')).toBeDisabled();
+      });
+
+      it('should have no more items than the number specified', function() {
+        for(var i = 0; i < numOfPages; i++) {
+          $('.next').click();
+          expect($('.git > li')).toHaveLengthLessThanOrEqualTo(showPerPage);
+        }
       });
 
       it('should disable next if action lands on last page', function() {
@@ -102,6 +115,13 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
         expect($('.prev')).toBeDisabled();
       });
 
+      it('should have no more items than the number specified', function() {
+        for(var i = 0; i < numOfPages; i++) {
+          $('.prev').click();
+          expect($('.git > li')).toHaveLengthLessThanOrEqualTo(showPerPage);
+        }
+      });
+
       it('should disable first if prev action lands on first page', function() {
         for(var i = 0; i < numOfPages; i++) {
           $('.prev').click();
@@ -115,11 +135,17 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
       beforeEach(function() {
         $('.next').click();
       });
+
       it('should move directly to the first page', function() {
         expect($('.page-count')).toContainText(2 + "/" + numOfPages);
 
         $('.first').click();
         expect($('.page-count')).toContainText(1 + "/" + numOfPages);
+      });
+
+      it('should have no more items than the number specified', function() {
+        $('.first').click();
+        expect($('.git > li')).toHaveLengthLessThanOrEqualTo(showPerPage);
       });
 
       it('should disable the first button', function() {
@@ -149,8 +175,13 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
       beforeEach(function() {
         $('.last').click();
       });
+
       it('should move directly to the last page', function() {
         expect($('.page-count')).toContainText(numOfPages + "/" + numOfPages);
+      });
+
+      it('should have no more items than the number specified', function() {
+        expect($('.git > li')).toHaveLengthLessThanOrEqualTo(showPerPage);
       });
 
       it('should disable the last button', function() {

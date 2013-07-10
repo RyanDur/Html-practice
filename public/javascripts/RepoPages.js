@@ -6,7 +6,7 @@ define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
     var pageCount = function(pageNumber, pageTotal) {
       $('.page-count').text(pageNumber + "/" + pageTotal);
     };
-    
+
     var disableMenu = function(buttons) {
       util.forEach(buttons, function(button) {
         if (button.attr('disabled') !== 'disabled') {
@@ -14,13 +14,20 @@ define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
         }
       });
     };
-    
+
     var enableMenu = function(buttons) {
       util.forEach(buttons, function(button) {
         if (button.attr('disabled') === 'disabled') {
           button.removeAttr('disabled');
         }
       });
+    };
+
+    var changePage = function(button, direction, func) {
+      button.closest('.repos').find('.git')
+      .hide('slide', {direction: direction}, function () {
+        func();
+      }).fadeIn();
     };
 
     return {
@@ -36,58 +43,52 @@ define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
               disableMenu([$('.first'), $('.prev')]);
               enableMenu([$('.last'), $('.next')]);
 
-              $(this).closest('.repos').find('.git')
-              .hide('slide', {direction: 'right'}, function () {
+              changePage($(this), 'right', function () {
                 page.first($('.git'), 'li');
                 pageCount(page.number(), page.total());
-              }).fadeIn();
+              });
              },
 
       last: function(event) {
               disableMenu([$('.last'), $('.next')]);
               enableMenu([$('.first'), $('.prev')]);
-              
-              $(this).closest('.repos').find('.git')
-              .hide('slide', {direction: 'left'}, function() {
+
+              changePage($(this), 'left', function() {
                 page.last($('.git'), 'li');
                 pageCount(page.number(), page.total());
-              }).fadeIn();
+              });
             },
 
       next: function(event) {
               disableMenu([$('.next')]);
               enableMenu([$('.first'), $('.prev')]);
 
-              $(this).closest('.repos').find('.git')
-              .hide('slide', {direction: 'left'}, function() {
-                
-                page.next($(this), 'li');
+              changePage($(this), 'left', function() {
+                page.next($('.git'), 'li');
                 pageCount(page.number(), page.total());
-                
+
                 if (page.isLast()) {
                   disableMenu([$('.last')]);
                 } else {
                   enableMenu([$('.next')]);
                 }
-              }).fadeIn();
+              });
             },
 
       previous: function(event) {
                   disableMenu([$('.prev')]);
                   enableMenu([$('.last'), $('.next')]);
 
-                  $(this).closest('.repos').find('.git')
-                  .hide('slide', {direction: 'right'}, function () {
-                    
+                  changePage($(this), 'right', function () {
                     page.prev($('.git'), 'li');
                     pageCount(page.number(), page.total());
-                    
+
                     if (page.isFirst()) {
                       disableMenu([$('.first')]);
                     } else {
                       enableMenu([$('.prev')]);
                     }
-                  }).fadeIn();
+                  });
                 }
     };
   };
