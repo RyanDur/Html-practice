@@ -11,8 +11,8 @@ define(['utility'], function(util) {
                  util.forEach(pages[num], appendElem);
                },
 
-         afterFirst: function() {
-                 return num > 0;
+         isFirst: function() {
+                 return num === 0;
                },
 
          last: function(ancestor, child) {
@@ -21,8 +21,8 @@ define(['utility'], function(util) {
                  util.forEach(pages[num], appendElem);
                },
 
-         beforeLast: function() {
-                 return num < pages.length - 1;
+         isLast: function() {
+                 return num === pages.length - 1;
                },
 
          total: function() {

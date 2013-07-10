@@ -115,29 +115,29 @@ define(['Pagination', 'jasminejquery'], function(Pagination) {
             });
         });
 
-        describe('afterFirst', function() {
+        describe('isFirst', function() {
             it('should return false if on the first page and true otherwise', function() {
                 page.first($('.git'), 'li');
-                expect(page.afterFirst()).toEqual(false);
+                expect(page.isFirst()).toEqual(true);
 
                 page.next($('.git'), 'li');
-                expect(page.afterFirst()).toEqual(true);
+                expect(page.isFirst()).toEqual(false);
 
                 page.prev($('.git'), 'li');
-                expect(page.afterFirst()).toEqual(false);
+                expect(page.isFirst()).toEqual(true);
             });
         });
 
-        describe('beforeLast', function() {
+        describe('isLast', function() {
             it('should return false  if on the last page and true otherwise', function() {
                 page.last($('.git'), 'li');
-                expect(page.beforeLast()).toEqual(false);
+                expect(page.isLast()).toEqual(true);
 
                 page.prev($('.git'), 'li');
-                expect(page.beforeLast()).toEqual(true);
+                expect(page.isLast()).toEqual(false);
 
                 page.next($('.git'), 'li');
-                expect(page.beforeLast()).toEqual(false);
+                expect(page.isLast()).toEqual(true);
             });
         });
 

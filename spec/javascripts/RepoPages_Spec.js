@@ -24,15 +24,19 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
       });
     });
 
-    describe('init', function() {
+   describe('init', function() {
       it('should load the first of the specified number of repos into the page and display the page count', function() {
         expect($('.page-count')).toContainText(1 + "/" + numOfPages);
         expect($('ul.git > li')).toHaveLength(showPerPage);
       });
 
-      it('should hide the previous button', function() {
-        expect($('.prev')).toHaveCss({visibility: 'hidden'});
+      it('should diable the first button', function() {
+        expect($('.first')).toBeDisabled();
       });
+
+      it('should disable the prev button', function() {
+        expect($('.prev')).toBeDisabled();
+      })
     });
 
     describe('next', function() {
@@ -42,31 +46,36 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
         expect($('.page-count')).toContainText(2 + "/" + numOfPages);
       });
 
-      it('should make the prev button visible', function() {
-        expect($('.prev')).toHaveCss({visibility: 'hidden'});
+      it('should enable the first button', function() {
         $('.next').click();
-        expect($('.prev')).toHaveCss({visibility: 'visible'});
+        expect($('.first')).not.toBeDisabled();
+      });
+      
+      it('should enable the prev buton', function() {
+        $('.next').click();
+        expect($('.prev')).not.toBeDisabled();
       });
 
-      it('should make the next button hidden on last page', function() {
-        for(var i = 1; i < numOfPages - 1; i++) {
+      it('should disable next if action lands on last page', function() {
+        for(var i = 0; i < numOfPages; i++) {
           $('.next').click();
         }
-        expect($('.page-count')).toContainText(numOfPages - 1 + "/" + numOfPages);
-        expect($('.next')).toHaveCss({visibility: 'visible'});
-
-        $('.next').click();
         expect($('.page-count')).toContainText(numOfPages + "/" + numOfPages);
-        expect($('.next')).toHaveCss({visibility: 'hidden'});
+        expect($('.next')).toBeDisabled();
+      });
+
+      it('should disable next if action lands on last page', function() {
+        for(var i = 0; i < numOfPages; i++) {
+          $('.next').click();
+        }
+        expect($('.page-count')).toContainText(numOfPages + "/" + numOfPages);
+        expect($('.last')).toBeDisabled();
       });
     });
 
     describe('previous', function() {
       beforeEach(function() {
-        for(var i = 1; i < numOfPages; i++) {
-          $('.next').click();
-        }
-        expect($('.page-count')).toContainText(numOfPages + "/" + numOfPages);
+        $('.last').click();
       });
 
       it('should move from one set of repos to the previous updating the page count', function() {
@@ -75,39 +84,89 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
         expect($('.page-count')).toContainText(numOfPages - 1 + "/" + numOfPages);
       });
 
-      it('should make the next button visible', function() {
-        expect($('.next')).toHaveCss({visibility: 'hidden'});
+      it('should enable the next button', function() {
         $('.prev').click();
-        expect($('.next')).toHaveCss({visibility: 'visible'});
+        expect($('.next')).not.toBeDisabled();
       });
-      
-      it('should make the previous button hidden on first page', function() {
-        for(var i = 1; i < numOfPages - 1; i++) {
+
+      it('should enable the last button', function() {
+        $('.prev').click();
+        expect($('.last')).not.toBeDisabled();
+      });
+
+      it('should disable prev if action lands on first page', function() {
+        for(var i = 0; i < numOfPages; i++) {
           $('.prev').click();
         }
-        expect($('.page-count')).toContainText(2 + "/" + numOfPages);
-        expect($('.prev')).toHaveCss({visibility: 'visible'});
-
-        $('.prev').click();
         expect($('.page-count')).toContainText(1 + "/" + numOfPages);
-        expect($('.prev')).toHaveCss({visibility: 'hidden'});
+        expect($('.prev')).toBeDisabled();
+      });
+
+      it('should disable first if prev action lands on first page', function() {
+        for(var i = 0; i < numOfPages; i++) {
+          $('.prev').click();
+        }
+        expect($('.page-count')).toContainText(1 + "/" + numOfPages);
+        expect($('.first')).toBeDisabled();
       });
     });
 
     describe('first', function() {
-      it('should move directly to the first page', function() {
+      beforeEach(function() {
         $('.next').click();
+      });
+      it('should move directly to the first page', function() {
         expect($('.page-count')).toContainText(2 + "/" + numOfPages);
 
         $('.first').click();
         expect($('.page-count')).toContainText(1 + "/" + numOfPages);
       });
+
+      it('should disable the first button', function() {
+        $('.first').click();
+        expect($('.first')).toBeDisabled();
+      });
+
+      it('should disable the prev button', function() {
+        $('.first').click();
+        expect($('.prev')).toBeDisabled();
+      });
+
+      it('should enable the last button', function() {
+        $('.last').click();
+        $('.first').click();
+        expect($('.last')).not.toBeDisabled();
+      });
+
+      it('should enable the next button', function() {
+        $('.last').click();
+        $('.first').click();
+        expect($('.next')).not.toBeDisabled();
+      });
     });
 
     describe('last', function() {
-      it('should move directly to the last page', function() {
+      beforeEach(function() {
         $('.last').click();
+      });
+      it('should move directly to the last page', function() {
         expect($('.page-count')).toContainText(numOfPages + "/" + numOfPages);
+      });
+
+      it('should disable the last button', function() {
+        expect($('.last')).toBeDisabled();
+      });
+
+      it('should disable the next button', function() {
+        expect($('.next')).toBeDisabled();
+      })
+
+      it('should enable the prev button', function() {
+        expect($('.prev')).not.toBeDisabled();
+      });
+
+      it('should enable the first button', function() {
+        expect($('.first')).not.toBeDisabled();
       });
     })
   });

@@ -1,7 +1,7 @@
 define(['Pagination', 'jqueryui'], function(Pagination) {
 
   return function(repo) {
-    var activeNext = false, activePrev = false, page = Pagination(repo);
+    var page = Pagination(repo);
 
     var pageCount = function(pageNumber, pageTotal) {
       $('.page-count').text(pageNumber + "/" + pageTotal);
@@ -10,8 +10,8 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
     return {
 
       init: function(data, showPerPage) {
-              $('.prev').css('visibility', 'hidden');
-              $('.first').css('visibility', 'hidden');
+              $('.first').attr('disabled', 'disabled');
+              $('.prev').attr('disabled', 'disabled');
               page.paginate(data, showPerPage);
               page.first($('.git'), 'li');
               pageCount(page.number(), page.total());
@@ -19,77 +19,71 @@ define(['Pagination', 'jqueryui'], function(Pagination) {
 
       first: function(event) {
               $('.first').attr('disabled', 'disabled');
-              $('.first').css('visibility', 'hidden');
-              $('.prev').css('visibility', 'hidden');
-              $('.last').css('visibility', 'visible');
-              $('.next').css('visibility', 'visible');
+              $('.prev').attr('disabled', 'disabled');
+              
+              $('.next').removeAttr('disabled');
+              $('.last').removeAttr('disabled');
 
-              if (page.afterFirst()) {
-                $(this).closest('.repos').find('.git')
-                .hide('slide', {direction: 'right'}, function () {
-                  page.first($('.git'), 'li');
-                  pageCount(page.number(), page.total());
-                  $('.first').removeAttr('disabled');
-                }).fadeIn();
-              } 
+              $(this).closest('.repos').find('.git')
+              .hide('slide', {direction: 'right'}, function () {
+                page.first($('.git'), 'li');
+                pageCount(page.number(), page.total());
+              }).fadeIn();
              },
 
       last: function(event) {
               $('.last').attr('disabled', 'disabled');
-              $('.last').css('visibility', 'hidden');
-              $('.next').css('visibility', 'hidden');
-              $('.first').css('visibility', 'visible');
-              $('.prev').css('visibility', 'visible');
+              $('.next').attr('disabled', 'disabled');
               
-              if (page.beforeLast()) {
-                $(this).closest('.repos').find('.git')
-                .hide('slide', {direction: 'left'}, function() {
-                  page.last($('.git'), 'li');
-                  pageCount(page.number(), page.total());
-                  $('.last').removeAttr('disabled');
-                  $('.prev').removeAttr('disabled');
-                }).fadeIn();
-              }
+              $('.prev').removeAttr('disabled');
+              $('.first').removeAttr('disabled');
+              
+              $(this).closest('.repos').find('.git')
+              .hide('slide', {direction: 'left'}, function() {
+                page.last($('.git'), 'li');
+                pageCount(page.number(), page.total());
+              }).fadeIn();
             },
 
       next: function(event) {
               $('.next').attr('disabled', 'disabled');
-              $('.first').css('visibility', 'visible');
-              if (page.number() === page.total()-1) {
-                $('.next').css('visibility', 'hidden');
-                $('.last').css('visibility', 'hidden');
-              }
+              
+              $('.first').removeAttr('disabled');
+              $('.prev').removeAttr('disabled');
 
-              if (page.beforeLast()) {
-                $('.prev').css('visibility', 'visible');
-                $(this).closest('.repos').find('.git')
-                .hide('slide', {direction: 'left'}, function() {
-                  page.next($(this), 'li');
-                  pageCount(page.number(), page.total());
+              $(this).closest('.repos').find('.git')
+              .hide('slide', {direction: 'left'}, function() {
+                
+                page.next($(this), 'li');
+                pageCount(page.number(), page.total());
+                
+                if (page.isLast()) {
+                  $('.last').attr('disabled', 'disabled');
+                } else {
                   $('.next').removeAttr('disabled');
-                  $('.first').removeAttr('disabled');
-                }).fadeIn();
-              }
+                }
+              }).fadeIn();
             },
 
       previous: function(event) {
                   $('.prev').attr('disabled', 'disabled');
-                  $('.last').css('visibility', 'visible');
-                  if (page.number() === (page.total() - (page.total() - 2))) {
-                    $('.prev').css('visibility', 'hidden');
-                    $('.first').css('visibility', 'hidden');
-                  }
+                  
+                  $('.next').removeAttr('disabled');
+                  $('.last').removeAttr('disabled');
 
-                  if (page.afterFirst()) {
-                    $('.next').css('visibility', 'visible');
-                    $(this).closest('.repos').find('.git')
-                    .hide('slide', {direction: 'right'}, function () {
-                      page.prev($('.git'), 'li');
-                      pageCount(page.number(), page.total());
+                  $(this).closest('.repos').find('.git')
+                  .hide('slide', {direction: 'right'}, function () {
+                    
+                    page.prev($('.git'), 'li');
+                    pageCount(page.number(), page.total());
+                    
+                    if (page.isFirst()) {
+                      $('.first').attr('disabled', 'disabled');
+                    } else {
                       $('.prev').removeAttr('disabled');
-                      $('.last').removeAttr('disabled');
-                    }).fadeIn();
-                  }
+                    }
+                  }).fadeIn();
+
                 }
     };
   };
