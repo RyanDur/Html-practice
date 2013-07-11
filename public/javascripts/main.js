@@ -2,13 +2,13 @@ require.config({
     urlArgs: "bust=" + (new Date()).getTime(), // not to be used in production
 
     paths: {
-        jquery: '../../components/jquery/jquery.min',
-        'jqueryui': '../../components/jquery-ui/ui/minified/jquery-ui.min',
-        'waypoints': '../../components/jquery-waypoints/waypoints.min',
+        jquery: 'vendor/jquery.min',
+        'jqueryui': 'vendor/jquery-ui.min',
+        'waypoints': 'vendor/waypoints.min',
     },
 
     shim: {
-        'jqueryui': {deps: ['jquery']}
+        'jqueryui': {deps: ['jquery']},
     }
 });
 

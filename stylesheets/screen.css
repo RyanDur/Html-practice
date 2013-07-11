@@ -255,42 +255,43 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background: #c2cccf;
   float: left;
   color: black;
+  font-size: 0.55em;
   height: 1.9em;
   border: none;
 }
-/* line 87, ../sass/_content.scss */
+/* line 88, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo button:enabled:hover {
   background: #e0e6e7;
 }
-/* line 91, ../sass/_content.scss */
+/* line 92, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo button:enabled:active {
   background: #586b70;
 }
-/* line 98, ../sass/_content.scss */
+/* line 99, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git {
   height: 100%;
 }
-/* line 101, ../sass/_content.scss */
+/* line 102, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li {
   margin: 0.5em 0 .5em 0;
   background: #c2cccf;
   padding: 0.25em 0 0.25em;
 }
-/* line 106, ../sass/_content.scss */
+/* line 107, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li a {
   text-decoration: none;
   color: black;
 }
-/* line 111, ../sass/_content.scss */
+/* line 112, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li:hover {
   background: #ced6d9;
 }
-/* line 119, ../sass/_content.scss */
+/* line 120, ../sass/_content.scss */
 .container .content .sidebar-right {
   border-left: 1em solid #f7f3e8;
   left: -25%;
 }
-/* line 125, ../sass/_content.scss */
+/* line 126, ../sass/_content.scss */
 .container .content .slideIn {
   opacity: 1;
   left: 0;
