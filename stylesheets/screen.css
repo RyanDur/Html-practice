@@ -202,51 +202,55 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   text-align: center;
   height: 11em;
 }
-/* line 44, ../sass/_content.scss */
+/* line 41, ../sass/_content.scss */
+.container .content .sidebar-left .repos div.repo-container nav.repo {
+  width: 100%;
+}
+/* line 45, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo button.first {
-  width: 4em;
+  width: 14%;
   -webkit-border-radius: 15em 0 0 15em;
   -moz-border-radius: 15em 0 0 15em;
   -ms-border-radius: 15em 0 0 15em;
   -o-border-radius: 15em 0 0 15em;
   border-radius: 15em 0 0 15em;
 }
-/* line 49, ../sass/_content.scss */
+/* line 50, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo button.prev {
-  margin-left: .725em;
-  width: 5.2em;
+  margin-left: 3%;
+  width: 20%;
 }
-/* line 56, ../sass/_content.scss */
+/* line 57, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo div.page-count {
   float: left;
   position: relative;
-  width: 3.95em;
+  width: 20%;
   background: #c2cccf;
   color: black;
   font-size: 0.7em;
   padding: 0.2em 1em 0.2em 1em;
-  margin: 0 .725em 0 .725em;
+  margin: 0 3% 0 3%;
   -webkit-border-radius: 15em;
   -moz-border-radius: 15em;
   -ms-border-radius: 15em;
   -o-border-radius: 15em;
   border-radius: 15em;
 }
-/* line 68, ../sass/_content.scss */
+/* line 69, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo button.next {
-  margin-right: .725em;
-  width: 5.2em;
+  margin-right: 3%;
+  width: 20%;
 }
-/* line 75, ../sass/_content.scss */
+/* line 76, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo button.last {
-  width: 4em;
+  width: 14%;
   -webkit-border-radius: 0 15em 15em 0;
   -moz-border-radius: 0 15em 15em 0;
   -ms-border-radius: 0 15em 15em 0;
   -o-border-radius: 0 15em 15em 0;
   border-radius: 0 15em 15em 0;
 }
-/* line 80, ../sass/_content.scss */
+/* line 81, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo button {
   background: #c2cccf;
   float: left;
@@ -254,39 +258,39 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   height: 1.9em;
   border: none;
 }
-/* line 86, ../sass/_content.scss */
+/* line 87, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo button:enabled:hover {
   background: #e0e6e7;
 }
-/* line 90, ../sass/_content.scss */
+/* line 91, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo button:enabled:active {
   background: #586b70;
 }
-/* line 97, ../sass/_content.scss */
+/* line 98, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git {
   height: 100%;
 }
-/* line 100, ../sass/_content.scss */
+/* line 101, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li {
   margin: 0.5em 0 .5em 0;
   background: #c2cccf;
   padding: 0.25em 0 0.25em;
 }
-/* line 105, ../sass/_content.scss */
+/* line 106, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li a {
   text-decoration: none;
   color: black;
 }
-/* line 110, ../sass/_content.scss */
+/* line 111, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li:hover {
   background: #ced6d9;
 }
-/* line 118, ../sass/_content.scss */
+/* line 119, ../sass/_content.scss */
 .container .content .sidebar-right {
   border-left: 1em solid #f7f3e8;
   left: -25%;
 }
-/* line 124, ../sass/_content.scss */
+/* line 125, ../sass/_content.scss */
 .container .content .slideIn {
   opacity: 1;
   left: 0;

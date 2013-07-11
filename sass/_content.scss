@@ -39,16 +39,17 @@
         div.repo-container {
 
           nav.repo {
+              width: 100%;
             @extend %clearfix;
 
             button.first {
-              width: 4em;
+              width: 14%;
               @include border-radius(15em 0 0 15em);
             }
 
             button.prev {
-              margin-left: .725em;
-              width: 5.2em;
+              margin-left: 3%;
+              width: 20%;
               //@include arrow_box(right);
               //@include border-radius(0 10px 10px 0);
             }
@@ -56,24 +57,24 @@
             div.page-count {
               float: left;
               position: relative;
-              width: 3.95em;
+              width: 20%;
               background: $ribbonColor;
               color: black;
               font-size: 0.7em;
               padding: 0.2em 1em 0.2em 1em;
-              margin: 0 .725em 0 .725em;
+              margin: 0 3% 0 3%;
               @include border-radius(15em);
             }
           
             button.next {
-              margin-right: .725em;
-              width: 5.2em;
+              margin-right: 3%;
+              width: 20%;
               //@include arrow_box(left);
               //@include border-radius(10px 0 0 10px);
             }
 
             button.last {
-              width: 4em;
+              width: 14%;
               @include border-radius(0 15em 15em 0);
             }
 
