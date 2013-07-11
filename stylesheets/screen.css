@@ -197,67 +197,96 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 33, ../sass/_content.scss */
 .container .content .sidebar-left .repos {
+  padding: 0.5em;
   position: relative;
   text-align: center;
   height: 11em;
 }
-/* line 46, ../sass/_content.scss */
-.container .content .sidebar-left .repos div.repo-container nav.repo button.prev {
-  margin-left: .7em;
+/* line 44, ../sass/_content.scss */
+.container .content .sidebar-left .repos div.repo-container nav.repo button.first {
+  width: 4em;
+  -webkit-border-radius: 15em 0 0 15em;
+  -moz-border-radius: 15em 0 0 15em;
+  -ms-border-radius: 15em 0 0 15em;
+  -o-border-radius: 15em 0 0 15em;
+  border-radius: 15em 0 0 15em;
 }
-/* line 52, ../sass/_content.scss */
+/* line 49, ../sass/_content.scss */
+.container .content .sidebar-left .repos div.repo-container nav.repo button.prev {
+  margin-left: .725em;
+  width: 5.2em;
+}
+/* line 56, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo div.page-count {
-  display: inline-block;
+  float: left;
+  position: relative;
+  width: 3.95em;
   background: #c2cccf;
   color: black;
-  font-size: 0.75em;
+  font-size: 0.7em;
   padding: 0.2em 1em 0.2em 1em;
-  margin: 0 .5em 0 .5em;
+  margin: 0 .725em 0 .725em;
   -webkit-border-radius: 15em;
   -moz-border-radius: 15em;
   -ms-border-radius: 15em;
   -o-border-radius: 15em;
   border-radius: 15em;
 }
-/* line 62, ../sass/_content.scss */
+/* line 68, ../sass/_content.scss */
 .container .content .sidebar-left .repos div.repo-container nav.repo button.next {
-  margin-right: .7em;
-}
-/* line 71, ../sass/_content.scss */
-.container .content .sidebar-left .repos div.repo-container nav.repo button {
-  display: inline-block;
-  background: #c2cccf;
-  color: black;
+  margin-right: .725em;
+  width: 5.2em;
 }
 /* line 75, ../sass/_content.scss */
-.container .content .sidebar-left .repos div.repo-container nav.repo button:hover {
+.container .content .sidebar-left .repos div.repo-container nav.repo button.last {
+  width: 4em;
+  -webkit-border-radius: 0 15em 15em 0;
+  -moz-border-radius: 0 15em 15em 0;
+  -ms-border-radius: 0 15em 15em 0;
+  -o-border-radius: 0 15em 15em 0;
+  border-radius: 0 15em 15em 0;
+}
+/* line 80, ../sass/_content.scss */
+.container .content .sidebar-left .repos div.repo-container nav.repo button {
+  background: #c2cccf;
+  float: left;
+  color: black;
+  height: 1.9em;
+  border: none;
+}
+/* line 86, ../sass/_content.scss */
+.container .content .sidebar-left .repos div.repo-container nav.repo button:enabled:hover {
   background: #e0e6e7;
 }
-/* line 82, ../sass/_content.scss */
+/* line 90, ../sass/_content.scss */
+.container .content .sidebar-left .repos div.repo-container nav.repo button:enabled:active {
+  background: #586b70;
+}
+/* line 97, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git {
   height: 100%;
 }
-/* line 85, ../sass/_content.scss */
+/* line 100, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li {
-  margin: 0.5em;
+  margin: 0.5em 0 .5em 0;
   background: #c2cccf;
   padding: 0.25em 0 0.25em;
 }
-/* line 90, ../sass/_content.scss */
+/* line 105, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li a {
   text-decoration: none;
   color: black;
 }
-/* line 95, ../sass/_content.scss */
+/* line 110, ../sass/_content.scss */
 .container .content .sidebar-left .repos .git li:hover {
   background: #ced6d9;
 }
-/* line 103, ../sass/_content.scss */
+/* line 118, ../sass/_content.scss */
 .container .content .sidebar-right {
   border-left: 1em solid #f7f3e8;
   left: -25%;
 }
-/* line 109, ../sass/_content.scss */
+/* line 124, ../sass/_content.scss */
 .container .content .slideIn {
   opacity: 1;
   left: 0;

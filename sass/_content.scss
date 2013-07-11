@@ -31,6 +31,7 @@
       border-right: 1em solid $background_color;
       left: 25%;
       .repos {
+        padding: 0.5em;
         position: relative;
         text-align: center;
         height: 11em;
@@ -41,39 +42,53 @@
             @extend %clearfix;
 
             button.first {
+              width: 4em;
+              @include border-radius(15em 0 0 15em);
             }
 
             button.prev {
-              margin-left: .7em;
+              margin-left: .725em;
+              width: 5.2em;
               //@include arrow_box(right);
               //@include border-radius(0 10px 10px 0);
             }
 
             div.page-count {
-              display: inline-block;
+              float: left;
+              position: relative;
+              width: 3.95em;
               background: $ribbonColor;
               color: black;
-              font-size: 0.75em;
+              font-size: 0.7em;
               padding: 0.2em 1em 0.2em 1em;
-              margin: 0 .5em 0 .5em;
+              margin: 0 .725em 0 .725em;
               @include border-radius(15em);
             }
           
             button.next {
-              margin-right: .7em;
+              margin-right: .725em;
+              width: 5.2em;
               //@include arrow_box(left);
               //@include border-radius(10px 0 0 10px);
             }
 
             button.last {
+              width: 4em;
+              @include border-radius(0 15em 15em 0);
             }
 
             button {
-              display: inline-block;
               background: $ribbonColor;
+              float: left;
               color: black;
-              &:hover{
+              height: 1.9em;
+              border: none;
+              &:enabled:hover{
                 @include background(scale-lightness($ribbonColor, 50));
+              }
+
+              &:enabled:active {
+                @include background(scale-lightness($ribbonColor, -50));
               }
             }
           }
@@ -83,7 +98,7 @@
           height: 100%;
         
           li {
-            margin: 0.5em;
+            margin: 0.5em 0 .5em 0;
             background: $ribbonColor;
             padding: 0.25em 0 0.25em;
           
