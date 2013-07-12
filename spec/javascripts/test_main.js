@@ -9,9 +9,9 @@ requirejs.config({
     baseUrl: '/base/public/javascripts',
 
     paths: {
-        jquery: '../../components/jquery/jquery.min',
-        'jasminejquery': '../../components/jasmine-jquery/lib/jasmine-jquery',
-        'jqueryui': '../../components/jquery-ui/ui/minified/jquery-ui.min'
+        jquery: 'vendor/jquery.min',
+        'jasminejquery': 'vendor/jasmine-jquery',
+        'jqueryui': 'vendor/jquery-ui.min'
     },
 
     shim: {
