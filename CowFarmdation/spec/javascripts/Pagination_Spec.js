@@ -1,7 +1,7 @@
 define(['Pagination', 'jasminejquery'], function(Pagination) {
 
     describe('Pagination', function() {
-        var elem, jsonData, page, showPerPage = 4, numOfPages;
+        var jsonData, page, showPerPage = 4, numOfPages;
 
         var appendElem = function(val) {
             $('.git').append("<li><a href="+ val.html_url +">"+ val.name +"</a></li>");
@@ -36,8 +36,7 @@ define(['Pagination', 'jasminejquery'], function(Pagination) {
                 }
             });
 
-            elem = $('<ul class="git"></ul>');
-            setFixtures(elem);
+            setFixtures($('<ul class="git"></ul>'));
             jsonData = getJSONFixture("git.json");
             page = Pagination(appendElem);
             page.paginate(jsonData, showPerPage);
@@ -180,7 +179,7 @@ define(['Pagination', 'jasminejquery'], function(Pagination) {
           it('should goto the page passed in', function() {
             page.goTo($('.git'), 'li', 3);
             expect(page.number()).toEqual(3);
-
+ 
             page.goTo($('.git'), 'li', 5);
             expect(page.number()).toEqual(5);
           })
