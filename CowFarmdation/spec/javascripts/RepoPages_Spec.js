@@ -13,11 +13,27 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
         $('.next').click();
       }
     }
+    var onPage = function(pageNumber) {
+      var page = showPerPage * ($('.page' + pageNumber).data('pagenum') - 1);
+      $('ul.git > li').each(function(index) {
+        var elem = $(this).find('a');
+        expect(elem).toContainText(jsonData[index + page].name);
+        expect(elem.attr('href')).toEqual(jsonData[index + page].html_url);
+      });
+    };
 
     beforeEach(function() {
       this.addMatchers({
         toHaveLengthLessThanOrEqualTo: function(expected) {
           return (this.actual.length < expected || this.actual.length === expected);
+        },
+
+        toBeCurrent: function() {
+          return this.actual.hasClass('current');
+        },
+
+        toBeAvailable: function() {
+          return !this.actual.hasClass('unavailable');
         }
       });
 
@@ -37,28 +53,28 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
 
     describe('init', function() {
       it('should load the first of the specified number of repos into the page and display the page count', function() {
-        expect($('.page-count')).toContainText(1 + "/" + numOfPages);
+        onPage(1);
         expect($('ul.git > li')).toHaveLength(showPerPage);
       });
 
       it('should make the first button unavailable', function() {
-        expect($('.page1')).toHaveClass('unavailable');
+        expect($('.page1')).not.toBeAvailable();
       });
 
       it('should make the prev button unavailable', function() {
-        expect($('.prev')).toHaveClass('unavailable');
+        expect($('.prev')).not.toBeAvailable();
       });
 
       it('should give first the class current', function() {
-        expect($('.page1')).toHaveClass('current');
+        expect($('.page1')).toBeCurrent();
       });
     });
 
     describe('next', function() {
       it('should move from one set of repos to the next updating the page count', function() {
-        expect($('.page-count')).toContainText(1 + "/" + numOfPages);
+        onPage(1);
         $('.next').click();
-        expect($('.page-count')).toContainText(2 + "/" + numOfPages);
+        onPage(2);
       });
 
       it('should should make current the page number it moves to', function() {
@@ -78,7 +94,7 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
 
       it('should disable next if action lands on last page', function() {
         moveToEnd();
-        expect($('.page-count')).toContainText(numOfPages + "/" + numOfPages);
+        onPage(numOfPages);
         expect($('.next')).toHaveClass('unavailable');
       });
 
@@ -94,15 +110,15 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
       });
 
       it('should move from one set of repos to the previous updating the page count', function() {
-        expect($('.page-count')).toContainText(numOfPages + "/" + numOfPages);
+        onPage(numOfPages);
         $('.prev').click()
-        expect($('.page-count')).toContainText(numOfPages - 1 + "/" + numOfPages);
+        onPage(numOfPages - 1);
       });
 
       it('should make next available', function() {
-        expect($('.next')).toHaveClass('unavailable');
+        expect($('.next')).not.toBeAvailable();
         $('.prev').click();
-        expect($('.next')).not.toHaveClass('unavailable');
+        expect($('.next')).toBeAvailable();
       });
 
       it('should make prev unavailable if action lands on first page', function() {
@@ -110,8 +126,8 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
         for(var i = 0; i < numOfPages; i++) {
           $('.prev').click();
         }
-        expect($('.page-count')).toContainText(1 + "/" + numOfPages);
-        expect($('.prev')).toHaveClass('unavailable');
+        onPage(1);
+        expect($('.prev')).not.toBeAvailable();
       });
 
       it('should have no more items than the number specified', function() {
@@ -125,27 +141,55 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
     describe('goTo', function() {
       it('should go to the given page', function() {
         $('.page3').click();
-        expect($('.page-count')).toContainText(3 + "/" + numOfPages);
+        onPage(3);
 
         $('.page5').click();
-        expect($('.page-count')).toContainText(5 + "/" + numOfPages);
+        onPage(5);
 
         $('.page1').click();
-        expect($('.page-count')).toContainText(1 + "/" + numOfPages);
+        onPage(1);
       });
 
-      it('should make the page nmber unavailable', function() {
-        expect($('.page7')).not.toHaveClass('unavailable');
+      it('should make the page number unavailable', function() {
+        expect($('.page7')).toBeAvailable();
         $('.page7').click();
-        expect($('.page-count')).toContainText(7 + "/" + numOfPages);
-        expect($('.page7')).toHaveClass('unavailable');
+        onPage(7);
+        expect($('.page7')).not.toBeAvailable();
       });
 
       it('should make the last page it was on available', function() {
-        expect($('.page1')).toHaveClass('unavailable');
+        expect($('.page1')).not.toBeAvailable();
         $('.page6').click();
-        expect($('.page-count')).toContainText(6 + "/" + numOfPages);
-        expect($('.page1')).not.toHaveClass('unavailable');
+        onPage(6);
+        expect($('.page1')).toBeAvailable();
+      });
+
+      it('should make the make the next button unavailable if the final page is chosen', function() {
+        expect($('.page8')).toBeAvailable();
+        expect($('.next')).toBeAvailable();
+        $('.page8').click();
+        expect($('.page8')).not.toBeAvailable();
+        expect($('.next')).not.toBeAvailable();
+      });
+
+      it('should make available next and prev if not on first or last page', function() {
+        $('.page4').click();
+        onPage(4);
+
+        expect($('.next')).toBeAvailable();
+        expect($('.prev')).toBeAvailable();
+      });
+
+      it('should make the make the prev button unavailable if the first page is chosen', function() {
+        $('.page8').click();
+        onPage(8);
+
+        expect($('.page1')).toBeAvailable();
+        expect($('.prev')).toBeAvailable();
+
+        $('.page1').click();
+        expect($('.page1')).not.toBeAvailable();
+        expect($('.prev')).not.toBeAvailable();
       });
     });
   });

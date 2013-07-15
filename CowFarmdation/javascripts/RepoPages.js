@@ -1,14 +1,11 @@
-define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
+define(['Pagination', 'PaginationMenu', 'utility', 'jqueryui'], function(Pagination, Menu, util) {
   var prev = '.prev', next = '.next';
   var prevDirection = 'right', nextDirection = 'left';
   var ancestor = '.repos', parent = '.git', child = 'li';
 
   return function(repoElem) {
     var page = Pagination(repoElem);
-
-    var pageCount = function(pageNumber, pageTotal) {
-      $('.page-count').text(pageNumber + "/" + pageTotal);
-    };
+    var menu = Menu();
 
     var disableMenu = function(buttons) {
       util.forEach(buttons, function(button) {
@@ -26,20 +23,35 @@ define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
       });
     };
 
-    var makeCurrent = function() {
-      var currentPage = '.page' + page.number();
+    var checkNextPrev = function() {
+      if(page.isLast()) {
+        disableMenu([$(next)]);
+      } else {
+        enableMenu([$(next)]);
+      }
+
+      if(page.isFirst()) {
+        disableMenu([$(prev)]);
+      } else {
+        enableMenu([$(prev)]);
+      }
+    };
+
+    var makeCurrent = function(page) {
       $(ancestor).find('li').removeClass('current');
-      $(currentPage).addClass('current');
-      disableMenu([$(currentPage)]);
+      page.addClass('current');
     };
 
     var changePage = function(button, direction, func) {
       button.closest(ancestor).find(parent)
       .hide('slide', {direction: direction}, function () {
         enableMenu([$('.page' + page.number())]);
+
         func();
-        pageCount(page.number(), page.total());
-        makeCurrent();
+
+        checkNextPrev();
+        disableMenu([$('.page' + page.number())]);
+        makeCurrent($('.page' + page.number()));
       }).fadeIn();
     };
 
@@ -56,37 +68,24 @@ define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
       init: function(data, showPerPage) {
               page.paginate(data, showPerPage);
               makePageNav();
-              disableMenu([$(prev)]);
-              makeCurrent();
+              disableMenu([$(prev), $('.page' + page.number())]);
+              makeCurrent($('.page' + page.number()));
               page.first($(parent), child);
-              pageCount(page.number(), page.total());
             },
 
       next: function(event) {
               if (page.isLast()) {return;}
 
-              disableMenu([$(next)]);
-              enableMenu([$(prev)]);
-
               changePage($(this), nextDirection, function() {
                 page.next($(parent), child);
-                if (!page.isLast()) {
-                  enableMenu([$(next)]);
-                }
               });
             },
 
       previous: function(event) {
                   if (page.isFirst()) {return;}
 
-                  disableMenu([$(prev)]);
-                  enableMenu([$(next)]);
-
                   changePage($(this), prevDirection, function () {
                     page.prev($(parent), child);
-                    if (!page.isFirst()) {
-                      enableMenu([$(prev)]);
-                    }
                   });
                 },
 
@@ -94,15 +93,13 @@ define(['Pagination', 'utility', 'jqueryui'], function(Pagination, util) {
               var pageNum = $(this).data('pagenum');
               if (pageNum === page.number()) {return;}
 
-              if (pageNum < page.number()) {
-                changePage($(this), prevDirection, function() {
-                  page.goTo($(parent), child, pageNum);
-                });
-              } else {
-                changePage($(this), nextDirection, function() {
-                  page.goTo($(parent), child, pageNum);
-                });
-              }
+              var direction = pageNum < page.number() ?
+                prevDirection :
+                nextDirection;
+
+              changePage($(this), direction, function() {
+                page.goTo($(parent), child, pageNum);
+              });
             }
     };
   };
