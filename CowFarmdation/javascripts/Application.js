@@ -32,7 +32,7 @@ define(['RepoPages', 'waypoints', 'utility'], function(RepoPages, waypoints, uti
   };
 
   var gitRepo = function(val) {
-    $('.git').append("<li><a class='repoLink' href="+ val.html_url +
+    $('.git').append("<li><a class='repoLink small button' href="+ val.html_url +
       " target=_blank>"+ val.name +"</a></li>");
   };
 
@@ -51,7 +51,7 @@ define(['RepoPages', 'waypoints', 'utility'], function(RepoPages, waypoints, uti
 
   var gitRepos = {
     type: 'GET',
-    //url: 'https://api.github.com/users/RyanDur/repos',
+    url: 'https://api.github.com/users/RyanDur/repos',
     cache: false,
     timeout: 5000,
     contentType: "application/json",
@@ -68,8 +68,7 @@ define(['RepoPages', 'waypoints', 'utility'], function(RepoPages, waypoints, uti
 
     $('.repos').on('click', '.next', repo.next)
     .on('click', '.prev', repo.previous)
-    .on('click', '.first', repo.first)
-    .on('click', '.last', repo.last);
+    .on('click', '.page', repo.goTo);
 
     slidePanelsIn();
   });

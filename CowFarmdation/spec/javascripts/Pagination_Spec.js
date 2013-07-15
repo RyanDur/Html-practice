@@ -175,5 +175,15 @@ define(['Pagination', 'jasminejquery'], function(Pagination) {
                 expect($('ul.git > li')).toHaveLength(2);
             })
         });
+
+        describe('goTo', function() {
+          it('should goto the page passed in', function() {
+            page.goTo($('.git'), 'li', 3);
+            expect(page.number()).toEqual(3);
+
+            page.goTo($('.git'), 'li', 5);
+            expect(page.number()).toEqual(5);
+          })
+        });
     });
 });

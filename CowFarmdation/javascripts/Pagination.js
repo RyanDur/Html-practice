@@ -47,6 +47,12 @@ define(['utility'], function(util) {
                 }
               },
 
+        goTo: function(ancestor, child, pageNum) {
+                  num = pageNum - 1;
+                  ancestor.find(child).remove();
+                  util.forEach(pages[num], appendElem);
+              },
+
         paginate: function(array, showPerPage) {
                     var page = [];
                     util.forEach(array, function(elem) {

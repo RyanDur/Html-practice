@@ -1,0 +1,14 @@
+@mixin repo {
+  .repos {
+    color: white;
+    h4 {color: white;}
+    .git {
+      li {
+        list-style-type: none;
+      }
+      .repoLink {
+        width: 100%;
+      }
+    }
+  }
+}
