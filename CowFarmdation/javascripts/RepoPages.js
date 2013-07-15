@@ -55,19 +55,11 @@ define(['Pagination', 'PaginationMenu', 'utility', 'jqueryui'], function(Paginat
       }).fadeIn();
     };
 
-    var makePageNav = function() {
-      $('nav.repo').find('ul').append('<li class="prev arrow"><a>&laquo;</a></li>');
-      for(var i = 1; i <= page.total(); i++) {
-        $('nav.repo').find('ul').append('<li class="page page'+ i +'" data-pagenum="'+ i +'"><a>'+ i +'</a>');
-      }
-      $('nav.repo').find('ul').append('<li class="next arrow"><a>&raquo;</a></li>');
-    };
-
     return {
 
       init: function(data, showPerPage) {
               page.paginate(data, showPerPage);
-              makePageNav();
+              menu.init($('nav.repo'), page.total());
               disableMenu([$(prev), $('.page' + page.number())]);
               makeCurrent($('.page' + page.number()));
               page.first($(parent), child);
