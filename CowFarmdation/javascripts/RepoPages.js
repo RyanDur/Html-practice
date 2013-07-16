@@ -3,68 +3,42 @@ define(['Pagination', 'PaginationMenu', 'utility', 'jqueryui'], function(Paginat
   var prevDirection = 'right', nextDirection = 'left';
   var ancestor = '.repos', parent = '.git', child = 'li';
 
-  return function(repoElem) {
-    var page = Pagination(repoElem);
-    var menu = Menu();
+  return function(data, showPerPage, repoElem) {
+    var page = Pagination(data, showPerPage, repoElem);
+    var menu = Menu('nav.repo', page.total());
 
-    var disableMenu = function(buttons) {
-      util.forEach(buttons, function(button) {
-        if (!button.hasClass('unavailable')) {
-          button.addClass('unavailable');
-        }
-      });
-    };
-
-    var enableMenu = function(buttons) {
-      util.forEach(buttons, function(button) {
-        if (button.hasClass('unavailable')) {
-          button.removeClass('unavailable');
-        }
-      });
-    };
+    page.first($(parent), child);
+    menu.unavailable([$(prev), $('.page' + page.number())]);
+    menu.current($('.page' + page.number()));
 
     var checkNextPrev = function() {
       if(page.isLast()) {
-        disableMenu([$(next)]);
+        menu.unavailable([$(next)]);
       } else {
-        enableMenu([$(next)]);
+        menu.available([$(next)]);
       }
 
       if(page.isFirst()) {
-        disableMenu([$(prev)]);
+        menu.unavailable([$(prev)]);
       } else {
-        enableMenu([$(prev)]);
+        menu.available([$(prev)]);
       }
-    };
-
-    var makeCurrent = function(page) {
-      $(ancestor).find('li').removeClass('current');
-      page.addClass('current');
     };
 
     var changePage = function(button, direction, func) {
       button.closest(ancestor).find(parent)
       .hide('slide', {direction: direction}, function () {
-        enableMenu([$('.page' + page.number())]);
+        menu.available([$('.page' + page.number())]);
 
         func();
 
         checkNextPrev();
-        disableMenu([$('.page' + page.number())]);
-        makeCurrent($('.page' + page.number()));
+        menu.unavailable([$('.page' + page.number())]);
+        menu.current($('.page' + page.number()));
       }).fadeIn();
     };
 
     return {
-
-      init: function(data, showPerPage) {
-              page.paginate(data, showPerPage);
-              menu.init($('nav.repo'), page.total());
-              disableMenu([$(prev), $('.page' + page.number())]);
-              makeCurrent($('.page' + page.number()));
-              page.first($(parent), child);
-            },
-
       next: function(event) {
               if (page.isLast()) {return;}
 

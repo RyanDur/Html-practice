@@ -38,7 +38,11 @@ define(['RepoPages', 'waypoints', 'utility'], function(RepoPages, waypoints, uti
 
   var loadRepo = function(json) {
     json.data.sort(util.compareUpdatedAt).reverse();
-    repo.init(json.data, showPerPage);
+    repo = RepoPages(json.data, showPerPage, gitRepo);
+
+    $('.repos').on('click', '.next', repo.next)
+    .on('click', '.prev', repo.previous)
+    .on('click', '.page', repo.goTo);
   };
 
   var spinner = function() {
@@ -62,13 +66,8 @@ define(['RepoPages', 'waypoints', 'utility'], function(RepoPages, waypoints, uti
   };
 
   $(function() {
-    repo = RepoPages(gitRepo);
     stickySection($(".nav-container"), $("nav.main"), options);
     $.ajax(gitRepos);
-
-    $('.repos').on('click', '.next', repo.next)
-    .on('click', '.prev', repo.previous)
-    .on('click', '.page', repo.goTo);
 
     slidePanelsIn();
   });

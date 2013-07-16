@@ -37,14 +37,13 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
         }
       });
 
-      repo = RepoPages(gitRepo);
       jsonData = getJSONFixture('git.json');
       loadFixtures('repos.html');
       numOfPages = Math.ceil(jsonData.length/showPerPage);
       jQuery.fx.off = true;
 
       $(function() {
-        repo.init(jsonData, showPerPage);
+        repo = RepoPages(jsonData, showPerPage, gitRepo);
         $('.repos').on('click', '.next', repo.next)
         .on('click', '.prev', repo.previous)
         .on('click', '.page', repo.goTo);

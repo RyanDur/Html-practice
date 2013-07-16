@@ -1,9 +1,22 @@
 define(['utility'], function(util) {
+    var paginate = function(array, showPerPage) {
+                  var page = [];
+                  var pages = [];
+                  util.forEach(array, function(elem) {
+                      page.push(elem);
+                      if (page.length === showPerPage ||
+                      page[page.length - 1] === array[array.length - 1]){
+                        pages.push(page);
+                        page = [];
+                      }
+                    });
+                  return pages;
+                  }
 
-    return function(appendElem) {
-      var pages = [];
+    return function(array, showPerPage, appendElem) {
+      var pages = paginate(array, showPerPage);
       var num = 0;
-      
+
       return {
         first: function(ancestor, child) {
                  ancestor.find(child).remove();
@@ -51,19 +64,7 @@ define(['utility'], function(util) {
                   num = pageNum - 1;
                   ancestor.find(child).remove();
                   util.forEach(pages[num], appendElem);
-              },
-
-        paginate: function(array, showPerPage) {
-                    var page = [];
-                    util.forEach(array, function(elem) {
-                      page.push(elem);
-                      if (page.length === showPerPage ||
-                      page[page.length - 1] === array[array.length - 1]){
-                        pages.push(page);
-                        page = [];
-                      }
-                    });
-                  }
+              }
         }
     };
 });
