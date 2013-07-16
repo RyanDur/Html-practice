@@ -1,6 +1,6 @@
-define(['Pages', 'utility'], function(Pages, util) {
+define(['utility'], function(util) {
     return function(array, showPerPage, appendElem) {
-        var pages = Pages(array, showPerPage);
+        var pages = util.segment(array, showPerPage);
         var num = 0;
 
         return {
