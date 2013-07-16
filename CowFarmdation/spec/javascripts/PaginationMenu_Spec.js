@@ -51,17 +51,15 @@ define(['PaginationMenu', 'jasminejquery'], function(PaginationMenu) {
 
     describe('unavailable', function() {
         it('should make the selections unavailable', function() {
-            expect($('.prev')).toBeAvailable();
             expect($('.page1')).toBeAvailable();
-            menu.unavailable([$('.prev'), $('.page1')]);
-            expect($('.prev')).not.toBeAvailable();
+            menu.unavailable($('.page1'));
             expect($('.page1')).not.toBeAvailable();
         });
 
         it('should make next unavailable if last page is unavailable', function(){
             expect($('.next')).toBeAvailable()
             expect($('.page8')).toBeAvailable();
-            menu.unavailable([$('.page8')]);
+            menu.unavailable($('.page8'));
             expect($('.page8')).not.toBeAvailable();
 
             expect($('.next')).not.toBeAvailable()
@@ -70,42 +68,40 @@ define(['PaginationMenu', 'jasminejquery'], function(PaginationMenu) {
         it('should make prev unavailable if first page is unavailable', function(){
             expect($('.prev')).toBeAvailable()
             expect($('.page1')).toBeAvailable();
-            menu.unavailable([$('.page1')]);
+            menu.unavailable($('.page1'));
             expect($('.page1')).not.toBeAvailable();
 
             expect($('.prev')).not.toBeAvailable()
-        });
-
-        it('should make next available if last page is available', function(){
-            menu.unavailable([$('.page8')]);
-            expect($('.page8')).not.toBeAvailable();
-            expect($('.next')).not.toBeAvailable()
-
-            menu.available([$('.page8')]);
-            expect($('.page8')).toBeAvailable();
-            expect($('.next')).toBeAvailable()
-        });
-
-        it('should make prev available if first page is available', function(){
-            menu.unavailable([$('.page1')]);
-            expect($('.page1')).not.toBeAvailable();
-            expect($('.prev')).not.toBeAvailable()
-
-            menu.available([$('.page1')]);
-            expect($('.page1')).toBeAvailable();
-            expect($('.prev')).toBeAvailable()
         });
     });
 
     describe('available', function() {
         it('should make the selections available', function() {
-            menu.unavailable([$('.next'), $('.page8')]);
-            expect($('.next')).not.toBeAvailable();
+            menu.unavailable($('.page8'));
             expect($('.page8')).not.toBeAvailable();
 
-            menu.available([$('.next'), $('.page8')]);
-            expect($('.next')).toBeAvailable();
+            menu.available($('.page8'));
             expect($('.page8')).toBeAvailable();
+        });
+
+        it('should make next available if last page is available', function(){
+            menu.unavailable($('.page8'));
+            expect($('.page8')).not.toBeAvailable();
+            expect($('.next')).not.toBeAvailable()
+
+            menu.available($('.page8'));
+            expect($('.page8')).toBeAvailable();
+            expect($('.next')).toBeAvailable()
+        });
+
+        it('should make prev available if first page is available', function(){
+            menu.unavailable($('.page1'));
+            expect($('.page1')).not.toBeAvailable();
+            expect($('.prev')).not.toBeAvailable()
+
+            menu.available($('.page1'));
+            expect($('.page1')).toBeAvailable();
+            expect($('.prev')).toBeAvailable()
         });
     });
 });
