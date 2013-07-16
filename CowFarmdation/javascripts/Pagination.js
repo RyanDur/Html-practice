@@ -1,20 +1,6 @@
-define(['utility'], function(util) {
-    var paginate = function(array, showPerPage) {
-        var page = [];
-        var pages = [];
-        util.forEach(array, function(elem) {
-            page.push(elem);
-            if (page.length === showPerPage ||
-            page[page.length - 1] === array[array.length - 1]){
-                pages.push(page);
-                page = [];
-            }
-        });
-        return pages;
-    }
-
+define(['Pages', 'utility'], function(Pages, util) {
     return function(array, showPerPage, appendElem) {
-        var pages = paginate(array, showPerPage);
+        var pages = Pages(array, showPerPage);
         var num = 0;
 
         return {
