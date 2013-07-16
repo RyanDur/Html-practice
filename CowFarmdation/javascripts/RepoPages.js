@@ -1,5 +1,4 @@
 define(['Pagination', 'PaginationMenu', 'utility', 'jqueryui'], function(Pagination, Menu, util) {
-  var prev = '.prev', next = '.next';
   var prevDirection = 'right', nextDirection = 'left';
   var ancestor = '.repos', parent = '.git', child = 'li';
 
@@ -8,22 +7,8 @@ define(['Pagination', 'PaginationMenu', 'utility', 'jqueryui'], function(Paginat
     var menu = Menu('nav.repo', page.total());
 
     page.first($(parent), child);
-    menu.unavailable([$(prev), $('.page' + page.number())]);
+    menu.unavailable([$('.page' + page.number())]);
     menu.current($('.page' + page.number()));
-
-    var checkNextPrev = function() {
-      if(page.isLast()) {
-        menu.unavailable([$(next)]);
-      } else {
-        menu.available([$(next)]);
-      }
-
-      if(page.isFirst()) {
-        menu.unavailable([$(prev)]);
-      } else {
-        menu.available([$(prev)]);
-      }
-    };
 
     var changePage = function(button, direction, func) {
       button.closest(ancestor).find(parent)
@@ -32,7 +17,6 @@ define(['Pagination', 'PaginationMenu', 'utility', 'jqueryui'], function(Paginat
 
         func();
 
-        checkNextPrev();
         menu.unavailable([$('.page' + page.number())]);
         menu.current($('.page' + page.number()));
       }).fadeIn();
