@@ -169,9 +169,6 @@ define(['Pagination', 'jasminejquery'], function(Pagination) {
             });
         });
 
-        xdescribe('paginate', function() {
-        });
-
         describe('goTo', function() {
           it('should goto the page passed in', function() {
             page.goTo($('.git'), 'li', 3);
