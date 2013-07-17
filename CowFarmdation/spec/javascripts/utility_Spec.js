@@ -1,4 +1,4 @@
-define(['utility'], function(util) {
+define(['utility', 'jasminejquery'], function(util) {
 
   describe('utility', function() {
 
@@ -24,10 +24,9 @@ define(['utility'], function(util) {
     });
 
     describe('segment', function() {
-        it('should return an array of segments the size of the number specified', function() {
-            var jsonData = getJSONFixture('git.json');
-            expect(util.segment(jsonData, 4).length).toEqual(8);
+        var jsonData = getJSONFixture('git.json');
 
+        it('should return an array of segments the size of the number specified', function() {
             expect(util.segment(jsonData, 10).length).toEqual(3);
             util.forEach(util.segment(jsonData, 10), function(segment) {
                 expect(segment.length).toEqual(10);
@@ -41,6 +40,40 @@ define(['utility'], function(util) {
             expect(util.segment(jsonData, 5).length).toEqual(6);
             util.forEach(util.segment(jsonData, 5), function(segment) {
                 expect(segment.length).toEqual(5);
+            });
+        });
+
+        it('should put the remainder in the last segment if it does not divide evenly', function() {
+            var lastOf = function(array) {return array[array.length-1]}
+
+            var segments = util.segment(jsonData, 4);
+            expect(segments.length).toEqual(8);
+            util.forEach(segments, function(segment) {
+                if(lastOf(segments) === segment) {
+                    expect(segment.length).toEqual(2);
+                } else {
+                    expect(segment.length).toEqual(4);
+                }
+            });
+
+            segments = util.segment(jsonData, 7);
+            expect(segments.length).toEqual(5);
+            util.forEach(segments, function(segment) {
+                if(lastOf(segments) === segment) {
+                    expect(segment.length).toEqual(2);
+                } else {
+                    expect(segment.length).toEqual(7);
+                }
+            });
+
+            segments = util.segment(jsonData, 9);
+            expect(segments.length).toEqual(4);
+            util.forEach(segments, function(segment) {
+                if(lastOf(segments) === segment) {
+                    expect(segment.length).toEqual(3);
+                } else {
+                    expect(segment.length).toEqual(9);
+                }
             });
         });
     });

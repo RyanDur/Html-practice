@@ -6,19 +6,11 @@ define(function() {
            }
         },
 
-        map: function(func, array) {
-           var result = [];
-           forEach(array, function (element) {
-               result.push(func(element));
-           });
-           return result;
-        },
-
-        segment: function(array, sizeOfSegment) {
-            var result = [], end = sizeOfSegment
-            for(var start = 0; start < array.length; start += sizeOfSegment) {
+        segment: function(array, sliceSize) {
+            var result = [], end = sliceSize;
+            for(var start = 0; start < array.length; start += sliceSize) {
                 result.push(array.slice(start, end));
-                end += sizeOfSegment;
+                end += sliceSize;
             } 
             return result;
         },
@@ -26,16 +18,5 @@ define(function() {
         compareUpdatedAt: function(a,b) {
            return (a.updated_at > b.updated_at) ? 1 : ((a.updated_at < b.updated_at) ? -1 : 0);
         },
-
-        addSpinner: function(elem) {
-           elem.addClass('spinner');
-           elem.append('<div class="ball"></div');
-           elem.append('<div class="ball1"></div');
-        },
-
-        removeSpinner: function(elem) {
-           elem.removeClass('spinner');
-           elem.empty();
-        }
     }
 });
