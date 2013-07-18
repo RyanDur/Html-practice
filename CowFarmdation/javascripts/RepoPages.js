@@ -1,9 +1,9 @@
-define(['Pagination', 'PaginationMenu', 'utility', 'jqueryui'], function(Pagination, Menu, util) {
+define(['Pages', 'PaginationMenu', 'utility', 'jqueryui'], function(Pages, Menu, util) {
     var prevDirection = 'right', nextDirection = 'left';
     var ancestor = '.repos', parent = '.git', child = 'li';
 
     return function(data, showPerPage, repoElem) {
-        var page = Pagination(data, showPerPage);
+        var page = Pages(data, showPerPage);
         var menu = Menu('nav.repo', page.total());
 
         var changePage = function(button, direction, func, pageNum) {

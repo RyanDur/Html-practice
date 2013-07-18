@@ -1,6 +1,6 @@
-define(['Pagination', 'utility', 'jasminejquery'], function(Pagination, util) {
+define(['Pages', 'utility', 'jasminejquery'], function(Pages, util) {
 
-    describe('Pagination', function() {
+    describe('Pages', function() {
         var jsonData, page, showPerPage, numOfPages, segments;
 
         beforeEach(function() {
@@ -12,7 +12,7 @@ define(['Pagination', 'utility', 'jasminejquery'], function(Pagination, util) {
 
             showPerPage = 4;
             jsonData = getJSONFixture('git.json');
-            page = Pagination(jsonData, showPerPage);
+            page = Pages(jsonData, showPerPage);
             segments = util.segment(jsonData, showPerPage);
             numOfPages = Math.ceil(jsonData.length/showPerPage);
         });
