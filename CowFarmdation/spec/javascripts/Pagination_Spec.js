@@ -3,28 +3,6 @@ define(['Pagination', 'utility', 'jasminejquery'], function(Pagination, util) {
     describe('Pagination', function() {
         var jsonData, page, showPerPage, numOfPages, segments;
 
-        var checkText = function(val) {
-            //$('ul.git > li').each(function(index) {
-            //    var elem = $(this).find('a');
-            //    expect(elem).toContainText(jsonData[index + val].name);
-            //    expect(elem.attr('href')).toEqual(jsonData[index + val].html_url);
-            //});
-        };
-
-        var fromFirst = function(pageNum, func) {
-            page.first($('.git'), 'li');
-            for (var i = 0; i < pageNum; i++) {
-                func(i);
-            };
-        };
-
-        var fromLast = function(pageNum, func) {
-            page.last($('.git'), 'li');
-            for (var i = numOfPages - 1; i >= pageNum -1; i--) {
-                func(i);
-            }
-        };
-
         beforeEach(function() {
             this.addMatchers({
                 toHaveLengthLessThanOrEqualTo: function(expected) {
