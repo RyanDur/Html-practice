@@ -1,4 +1,4 @@
-define(['Pages', 'PaginationMenu', 'utility', 'jqueryui'], function(Pages, Menu, util) {
+define(['Pages', 'PagesMenu', 'utility', 'jqueryui'], function(Pages, Menu, util) {
     var prevDirection = 'right', nextDirection = 'left';
     var ancestor = '.repos', displayArea = '.git', child = 'li';
 

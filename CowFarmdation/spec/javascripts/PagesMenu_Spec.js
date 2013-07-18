@@ -1,4 +1,4 @@
-define(['PaginationMenu', 'jasminejquery'], function(PaginationMenu) {
+define(['PagesMenu', 'jasminejquery'], function(PagesMenu) {
     var menu;
 
     beforeEach(function() {
@@ -13,7 +13,7 @@ define(['PaginationMenu', 'jasminejquery'], function(PaginationMenu) {
         });
 
         setFixtures($('<nav class="repo"><ul></ul></nav>'));
-        menu = PaginationMenu('nav.repo', 8);
+        menu = PagesMenu('nav.repo', 8);
     });
 
     describe('init', function() {
