@@ -1,23 +1,21 @@
 define(['utility'], function(util) {
-    return function(array, showPerPage, appendElem) {
+    return function(array, showPerPage) {
         var pages = util.segment(array, showPerPage);
         var num = 0;
 
         return {
-            first: function(ancestor, child) {
-                       ancestor.find(child).remove();
+            first: function() {
                        num = 0;
-                       util.forEach(pages[num], appendElem);
+                       return pages[num];
                    },
 
             isFirst: function() {
                          return num === 0;
                      },
 
-            last: function(ancestor, child) {
-                      ancestor.find(child).remove();
+            last: function() {
                       num = pages.length - 1;
-                      util.forEach(pages[num], appendElem);
+                      return pages[num];
                   },
 
             isLast: function() {
@@ -32,24 +30,21 @@ define(['utility'], function(util) {
                         return num + 1;
                     },
 
-            next: function(ancestor, child) {
+            next: function() {
                       if (num < pages.length - 1) {
-                          ancestor.find(child).remove();
-                          util.forEach(pages[++num], appendElem);
+                          return pages[++num];
                       }
                   },
 
-            prev: function(ancestor, child) {
+            prev: function() {
                       if(num > 0) {
-                          ancestor.find(child).remove();
-                          util.forEach(pages[--num], appendElem);
+                          return pages[--num];
                       }
                   },
 
-            goTo: function(ancestor, child, pageNum) {
+            goTo: function(pageNum) {
                       num = pageNum - 1;
-                      ancestor.find(child).remove();
-                      util.forEach(pages[num], appendElem);
+                      return pages[num];
                   }
         }
     };
