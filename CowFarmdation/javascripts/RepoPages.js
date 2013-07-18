@@ -1,15 +1,17 @@
 define(['Pages', 'PaginationMenu', 'utility', 'jqueryui'], function(Pages, Menu, util) {
     var prevDirection = 'right', nextDirection = 'left';
-    var ancestor = '.repos', parent = '.git', child = 'li';
+    var ancestor = '.repos', displayArea = '.git', child = 'li';
 
     return function(data, showPerPage, repoElem) {
-        var page = Pages(data, showPerPage);
-        var menu = Menu('nav.repo', page.total());
+        var pages = Pages(data, showPerPage);
+        var menu = Menu('nav.repo', pages.total());
 
-        var changePage = function(button, direction, func, pageNum) {
-            button.closest(ancestor).find(parent)
+        var page = function() {return $('.page' + pages.number())}
+
+        var change = function(button, direction, func, pageNum) {
+            button.closest(ancestor).find(displayArea)
             .hide('slide', {direction: direction}, function () {
-                $(parent).find(child).remove();
+                $(this).find(child).remove();
 
                 if (pageNum === undefined) {
                     util.forEach(func(), repoElem);
@@ -17,33 +19,33 @@ define(['Pages', 'PaginationMenu', 'utility', 'jqueryui'], function(Pages, Menu,
                     util.forEach(func(pageNum), repoElem);
                 }
 
-                menu.current($('.page' + page.number()));
+                menu.current(page());
             }).fadeIn();
         };
 
-        util.forEach(page.first(), repoElem);
-        menu.current($('.page' + page.number()));
+        util.forEach(pages.first(), repoElem);
+        menu.current(page());
 
         return {
             next: function(event) {
-                      if (page.isLast()) {return;}
-                      changePage($(this), nextDirection, page.next);
+                      if (pages.isLast()) {return;}
+                      change($(this), nextDirection, pages.next);
                   },
 
             previous: function(event) {
-                          if (page.isFirst()) {return;}
-                          changePage($(this), prevDirection, page.prev);
+                          if (pages.isFirst()) {return;}
+                          change($(this), prevDirection, pages.prev);
                       },
 
             goTo: function(event) {
                       var pageNum = $(this).data('pagenum');
-                      if (pageNum === page.number()) {return;}
+                      if (pageNum === pages.number()) {return;}
 
-                      var direction = pageNum < page.number() ?
+                      var direction = pageNum < pages.number() ?
                           prevDirection :
                           nextDirection;
 
-                      changePage($(this), direction, page.goTo, pageNum);
+                      change($(this), direction, pages.goTo, pageNum);
                   }
         };
     };
