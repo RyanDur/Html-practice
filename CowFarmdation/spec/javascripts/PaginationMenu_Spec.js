@@ -47,59 +47,55 @@ define(['PaginationMenu', 'jasminejquery'], function(PaginationMenu) {
             expect($('.page7')).toBeCurrent();
             expect($('ul > li.current')).toHaveLength(1);
         });
-    });
 
-    describe('unavailable', function() {
-        it('should make the selections unavailable', function() {
+        it('should make current unavailable', function() {
             expect($('.page1')).toBeAvailable();
-            menu.unavailable($('.page1'));
+            menu.current($('.page1'));
             expect($('.page1')).not.toBeAvailable();
         });
 
-        it('should make next unavailable if last page is unavailable', function(){
+        it('should make next unavailable if last page is current', function(){
             expect($('.next')).toBeAvailable()
             expect($('.page8')).toBeAvailable();
-            menu.unavailable($('.page8'));
+            menu.current($('.page8'));
             expect($('.page8')).not.toBeAvailable();
 
             expect($('.next')).not.toBeAvailable()
         });
 
-        it('should make prev unavailable if first page is unavailable', function(){
+        it('should make prev unavailable if first page is current', function(){
             expect($('.prev')).toBeAvailable()
             expect($('.page1')).toBeAvailable();
-            menu.unavailable($('.page1'));
+            menu.current($('.page1'));
             expect($('.page1')).not.toBeAvailable();
 
             expect($('.prev')).not.toBeAvailable()
         });
-    });
 
-    describe('available', function() {
-        it('should make the selections available', function() {
-            menu.unavailable($('.page8'));
+        it('should make the previous current available', function() {
+            menu.current($('.page8'));
             expect($('.page8')).not.toBeAvailable();
 
-            menu.available($('.page8'));
+            menu.current($('.page7'));
             expect($('.page8')).toBeAvailable();
         });
 
-        it('should make next available if last page is available', function(){
-            menu.unavailable($('.page8'));
+        it('should make next available if any but the last page is current', function(){
+            menu.current($('.page8'));
             expect($('.page8')).not.toBeAvailable();
             expect($('.next')).not.toBeAvailable()
 
-            menu.available($('.page8'));
+            menu.current($('.page1'));
             expect($('.page8')).toBeAvailable();
             expect($('.next')).toBeAvailable()
         });
 
-        it('should make prev available if first page is available', function(){
-            menu.unavailable($('.page1'));
+        it('should make prev available if any but the first page is current', function(){
+            menu.current($('.page1'));
             expect($('.page1')).not.toBeAvailable();
             expect($('.prev')).not.toBeAvailable()
 
-            menu.available($('.page1'));
+            menu.current($('.page5'));
             expect($('.page1')).toBeAvailable();
             expect($('.prev')).toBeAvailable()
         });

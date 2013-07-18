@@ -2,15 +2,9 @@ define(function() {
     var prev = '.prev', next = '.next';
 
     return function(elem, pageTotal) {
-        var makeUnavailable = function(elem) {
-            if (!elem.hasClass('unavailable')) {
-                elem.addClass('unavailable');
-            }
-        }
-
-        var makeAvailable = function(elem) {
-            if (elem.hasClass('unavailable')) {
-                elem.removeClass('unavailable');
+        var make = function(elem, className) {
+            if (!elem.hasClass(className)) {
+                elem.addClass(className);
             }
         }
 
@@ -23,34 +17,19 @@ define(function() {
         return {
             current: function(page) {
                          $(elem).find('li').removeClass('current');
-                         page.addClass('current');
-                     },
+                         $(elem).find('li').removeClass('unavailable');
 
-            unavailable: function(button) {
-                             makeUnavailable(button);
+                         make(page, 'current');
+                         make(page, 'unavailable');
 
-                             if(button.data('pagenum') === pageTotal) {
-                                 makeUnavailable($(next));
-                             }
+                         if(page.data('pagenum') === pageTotal) {
+                             make($(next), 'unavailable');
+                          }
 
-                             if(button.data('pagenum') === 1) {
-                                 makeUnavailable($(prev));
-                             }
-                         },
-
-            available: function(button) {
-                           if (button.hasClass('unavailable')) {
-                               makeAvailable(button);
-
-                               if(button.data('pagenum') === pageTotal) {
-                                   makeAvailable($(next));
-                               }
-
-                               if(button.data('pagenum') === 1) {
-                                   makeAvailable($('.prev'));
-                               }
-                           }
-                       }
+                          if(page.data('pagenum') === 1) {
+                             make($(prev), 'unavailable');
+                          }
+                     }
         };
     };
 });

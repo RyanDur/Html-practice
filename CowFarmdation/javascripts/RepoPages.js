@@ -9,7 +9,6 @@ define(['Pagination', 'PaginationMenu', 'utility', 'jqueryui'], function(Paginat
         var changePage = function(button, direction, func, pageNum) {
             button.closest(ancestor).find(parent)
             .hide('slide', {direction: direction}, function () {
-                menu.available($('.page' + page.number()));
                 $(parent).find(child).remove();
 
                 if (pageNum === undefined) {
@@ -18,13 +17,11 @@ define(['Pagination', 'PaginationMenu', 'utility', 'jqueryui'], function(Paginat
                     util.forEach(func(pageNum), repoElem);
                 }
 
-                menu.unavailable($('.page' + page.number()));
                 menu.current($('.page' + page.number()));
             }).fadeIn();
         };
 
         util.forEach(page.first(), repoElem);
-        menu.unavailable($('.page' + page.number()));
         menu.current($('.page' + page.number()));
 
         return {
