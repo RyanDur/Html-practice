@@ -23,7 +23,7 @@ define(['RepoPages', 'MainNav', 'utility'], function(RepoPages, MainNav, util) {
   };
 
   var spinner = function() {
-    util.addSpinner($('.git'));
+    //util.addSpinner($('.git'));
   };
 
   var error = function() {

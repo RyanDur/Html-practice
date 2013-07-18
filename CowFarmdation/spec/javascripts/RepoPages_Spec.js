@@ -25,7 +25,7 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
     beforeEach(function() {
       this.addMatchers({
         toHaveLengthLessThanOrEqualTo: function(expected) {
-          return (this.actual.length < expected || this.actual.length === expected);
+          return this.actual.length <= expected;
         },
 
         toBeCurrent: function() {

@@ -1,43 +1,41 @@
-define(['Pagination', 'PaginationMenu', 'jqueryui'], function(Pagination, Menu) {
+define(['Pagination', 'PaginationMenu', 'utility', 'jqueryui'], function(Pagination, Menu, util) {
     var prevDirection = 'right', nextDirection = 'left';
     var ancestor = '.repos', parent = '.git', child = 'li';
 
     return function(data, showPerPage, repoElem) {
-        var page = Pagination(data, showPerPage, repoElem);
+        var page = Pagination(data, showPerPage);
         var menu = Menu('nav.repo', page.total());
 
-        var changePage = function(button, direction, func) {
+        var changePage = function(button, direction, func, pageNum) {
             button.closest(ancestor).find(parent)
             .hide('slide', {direction: direction}, function () {
-
                 menu.available($('.page' + page.number()));
+                $(parent).find(child).remove();
 
-                func();
+                if (pageNum === undefined) {
+                    util.forEach(func(), repoElem);
+                } else {
+                    util.forEach(func(pageNum), repoElem);
+                }
 
                 menu.unavailable($('.page' + page.number()));
                 menu.current($('.page' + page.number()));
             }).fadeIn();
         };
 
-        page.first($(parent), child);
+        util.forEach(page.first(), repoElem);
         menu.unavailable($('.page' + page.number()));
         menu.current($('.page' + page.number()));
 
         return {
             next: function(event) {
                       if (page.isLast()) {return;}
-
-                      changePage($(this), nextDirection, function() {
-                          page.next($(parent), child);
-                      });
+                      changePage($(this), nextDirection, page.next);
                   },
 
             previous: function(event) {
                           if (page.isFirst()) {return;}
-
-                          changePage($(this), prevDirection, function () {
-                              page.prev($(parent), child);
-                          });
+                          changePage($(this), prevDirection, page.prev);
                       },
 
             goTo: function(event) {
@@ -48,9 +46,7 @@ define(['Pagination', 'PaginationMenu', 'jqueryui'], function(Pagination, Menu) 
                           prevDirection :
                           nextDirection;
 
-                      changePage($(this), direction, function() {
-                          page.goTo($(parent), child, pageNum);
-                      });
+                      changePage($(this), direction, page.goTo, pageNum);
                   }
         };
     };
