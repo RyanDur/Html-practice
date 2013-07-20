@@ -2,7 +2,7 @@ require.config({
     urlArgs: "bust=" + (new Date()).getTime(), // not to be used in production
 
     paths: {
-        jquery: 'vendor/jquery',
+        jquery: 'vendor/jquery.min',
         'jqueryui': 'vendor/jquery-ui.min',
         'waypoints': 'vendor/waypoints.min',
         'modernizer': 'vendor/modernizer',
@@ -24,6 +24,7 @@ require.config({
 
     shim: {
         'jqueryui': {deps: ['jquery']},
+        'waypoints': {deps: ['jquery']},
         'foundation': {deps: ["jquery"]},
         "foundation.cookie": {deps: ["foundation"]},
         "foundation.alerts": {deps: ["foundation"]},
@@ -56,6 +57,8 @@ requirejs([
            "foundation.topbar",
            'Application'
            ], function () {
-            $(document).foundation();
+            $(document).foundation(function(response) {
+              console.log(response.errors);
+            });
           });
 

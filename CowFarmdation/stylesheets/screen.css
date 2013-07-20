@@ -1,3 +1,7 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* normalize.css v2.1.1 | MIT License | git.io/normalize */
 /* ==========================================================================
    HTML5 display definitions
@@ -6733,30 +6737,9 @@ a.th {
   max-width: 800px;
 }
 
-/* line 6, ../sass/app.scss */
-body {
-  background: #f7f3e8;
-}
-
-/* line 11, ../sass/app.scss */
+/* line 13, ../sass/screen.scss */
 .container {
   position: relative;
-}
-/* line 2, ../sass/_repo.scss */
-.container .repos {
-  color: white;
-}
-/* line 4, ../sass/_repo.scss */
-.container .repos h4 {
-  color: white;
-}
-/* line 6, ../sass/_repo.scss */
-.container .repos .git li {
-  list-style-type: none;
-}
-/* line 9, ../sass/_repo.scss */
-.container .repos .git .repoLink {
-  width: 100%;
 }
 /* line 3, ../sass/_navRibbon.scss */
 .container nav.main {
@@ -6766,4 +6749,22 @@ body {
 .container nav.main .topBar {
   background: #c2cccf;
   margin-bottom: 0;
+}
+
+/* line 22, ../sass/screen.scss */
+.stuck {
+  position: fixed !important;
+}
+
+/* line 26, ../sass/screen.scss */
+.slideIn {
+  opacity: 1;
+  left: 0;
+}
+
+/* line 31, ../sass/screen.scss */
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }

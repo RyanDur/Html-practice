@@ -1,0 +1,13 @@
+@mixin navRibbon {
+
+    nav.main {
+        @extend .large-6, .large-centered, .columns;
+        z-index: 42;
+
+        .topBar {
+            @extend .top-bar, .row;
+            background: $ribbonColor;
+            margin-bottom: 0;
+        }
+    }
+}

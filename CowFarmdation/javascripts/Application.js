@@ -43,7 +43,8 @@ define(['RepoPages', 'MainNav', 'utility'], function(RepoPages, MainNav, util) {
   };
 
   $(function() {
-    MainNav($(".nav-container"), $("nav.main"), options);
+    MainNav($(".nav-container"), $(".sticky-nav"), options);
+
     $.ajax(gitRepos);
 
     slidePanelsIn();
