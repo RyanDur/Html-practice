@@ -14,7 +14,7 @@ define(['RepoPages', 'jasminejquery'], function(RepoPages) {
       }
     }
     var onPage = function(pageNumber) {
-      var page = showPerPage * ($('.page' + pageNumber).data('pagenum') - 1);
+      var page = showPerPage * (pageNumber - 1);
       $('ul.git > li').each(function(index) {
         var elem = $(this).find('a');
         expect(elem).toContainText(jsonData[index + page].name);
